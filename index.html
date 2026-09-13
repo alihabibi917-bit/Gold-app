@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Gold Super App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap');
+        body { font-family: 'Vazirmatn', sans-serif; background-color: #0d0d0d; color: #f3f4f6; }
+        .gold-gradient { background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-card { background: linear-gradient(145deg, #1a1a1a, #111111); border: 1px solid rgba(191, 149, 63, 0.2); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); }
+        .btn-gold { background: linear-gradient(135deg, #bf953f, #aa771c); color: #000; font-weight: bold; }
+    </style>
+</head>
+<body class="p-4 max-w-md mx-auto">
+
+    <div class="flex justify-between items-center mb-4 bg-gray-900 p-2.5 rounded-xl border border-gray-800">
+        <div class="flex items-center space-x-2 space-x-reverse">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span class="text-[11px] text-green-400 font-bold" id="status-text">Server Active (Cloud)</span>
+        </div>
+        <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-black text-yellow-400 text-xs px-2 py-1 rounded-lg border border-yellow-600/40 outline-none">
+            <option value="fa">🇮🇷 فارسی</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="ar">🇸🇦 العربية</option>
+            <option value="zh">🇨🇳 中文</option>
+            <option value="tr">🇹🇷 Türkçe</option>
+            <option value="ru">🇷🇺 Русский</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="de">🇩🇪 Deutsch</option>
+        </select>
+    </div>
+
+    <div class="text-center mb-6">
+        <div class="inline-block p-3 rounded-full gold-card mb-2">
+            <i class="fa-solid fa-gem text-3xl gold-gradient"></i>
+        </div>
+        <h1 class="text-2xl font-bold gold-gradient" id="t-title">سوپر اپ تخصصی طلا و فارکس</h1>
+        <p class="text-xs text-gray-400 mt-1" id="t-subtitle">سامانه جهانی تحلیل، سیگنال و محاسبات طلا</p>
+    </div>
+
+    <div class="gold-card rounded-2xl p-4 mb-4">
+        <div class="flex justify-between items-center mb-3 border-b border-gray-800 pb-2">
+            <span class="text-sm font-bold text-yellow-500"><i class="fa-solid fa-bolt ml-1"></i> <span id="t-live">نرخ‌های زنده بازار</span></span>
+        </div>
+        <div class="space-y-2.5 text-sm">
+            <div class="flex justify-between items-center"><span class="text-gray-300" id="t-ounce">انس جهانی (XAU/USD)</span><span class="font-bold text-yellow-400">4,350.36 $</span></div>
+            <div class="flex justify-between items-center"><span class="text-gray-300" id="t-emami">سکه امامی</span><span class="font-bold text-emerald-400">48,500,000 تومان</span></div>
+            <div class="flex justify-between items-center"><span class="text-gray-300" id="t-gram">طلای ۱۸ عیار</span><span class="font-bold text-emerald-400">24,100,000 تومان</span></div>
+        </div>
+    </div>
+
+    <div class="gold-card rounded-2xl p-4 mb-4">
+        <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-bold text-yellow-500"><i class="fa-solid fa-brain ml-1"></i> <span id="t-analysis">تحلیل جامع (16 فاکتور)</span></span>
+            <span class="text-xs font-bold text-green-400">78% Bullish</span>
+        </div>
+        <div class="w-full bg-gray-800 rounded-full h-2 mb-2">
+            <div class="bg-gradient-to-r from-yellow-600 to-emerald-400 h-2 rounded-full" style="width: 78%"></div>
+        </div>
+        <p class="text-xs text-gray-400" id="t-analysis-desc">تاییدیه سه‌لایه فاندامنتال و تکنیکال فعال است.</p>
+    </div>
+
+    <div class="gold-card rounded-2xl p-4 mb-4 border-l-4 border-l-green-500">
+        <div class="flex justify-between items-center mb-3">
+            <span class="text-sm font-bold text-white"><i class="fa-solid fa-chart-line ml-1"></i> <span id="t-signal">سیگنال فارکس MT5</span></span>
+            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded font-bold">LONG 🟢</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-xs mb-3 bg-black/40 p-2.5 rounded-xl border border-gray-800">
+            <div>Entry: <span class="text-yellow-400 font-bold">2,650.0</span></div>
+            <div>SL: <span class="text-red-400 font-bold">2,642.0</span></div>
+            <div>TP1: <span class="text-green-400 font-bold">2,668.0</span></div>
+            <div>R:R: <span class="text-cyan-400 font-bold">1:1.3</span></div>
+        </div>
+        <button onclick="copySignal()" class="btn-gold w-full py-2.5 rounded-xl text-sm font-bold shadow-lg">
+            <i class="fa-regular fa-copy ml-1"></i> <span id="t-copy">کپی پارامترها</span>
+        </button>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.ready();
+
+        const translations = {
+            fa: { title: "سوپر اپ تخصصی طلا و فارکس", subtitle: "سامانه جهانی تحلیل، سیگنال و محاسبات طلا", live: "نرخ‌های زنده بازار", ounce: "انس جهانی (XAU/USD)", emami: "سکه امامی", gram: "طلای ۱۸ عیار", analysis: "تحلیل جامع (16 فاکتور)", desc: "تاییدیه سه‌لایه فاندامنتال و تکنیکال فعال است.", signal: "سیگنال فارکس MT5", copy: "کپی پارامترها", active: "سرور ابری فعال (۲۴ ساعته)" },
+            en: { title: "Global Gold & Forex Super App", subtitle: "Global System for Gold Analysis & Signals", live: "Live Market Rates", ounce: "World Gold (XAU/USD)", emami: "Emami Coin", gram: "18K Gold Gram", analysis: "Master Analysis (16 Factors)", desc: "Triple-layer fundamental & technical confirmation active.", signal: "MT5 Forex Signal", copy: "Copy Parameters", active: "Cloud Server Active (24/7)" },
+            ar: { title: "التطبيق العملاق للذهب والفوركس", subtitle: "النظام العالمي لتحليل وإشارات الذهب", live: "أسعار السوق المباشرة", ounce: "أونصة الذهب (XAU/USD)", emami: "عملة الإمامي", gram: "غرام الذهب عيار 18", analysis: "التحليل الشامل (16 عامل)", desc: "تأكيد أساسي وفني ثلاثي الطبقات نشط.", signal: "إشارة فوركس MT5", copy: "نسخ المعلمات", active: "خادم السحاب نشط" },
+            zh: { title: "全球黄金与外汇超级应用", subtitle: "黄金分析与信号全球系统", live: "实时市场汇率", ounce: "国际黄金 (XAU/USD)", emami: "伊玛米金币", gram: "18K黄金克价", analysis: "综合分析 (16项指标)", desc: "三层基本面和技术面确认已激活。", signal: "MT5 外汇信号", copy: "复制参数", active: "云服务器运行中" },
+            tr: { title: "Küresel Altın ve Forex Süper Uygulaması", subtitle: "Altın Analizi ve Sinyal Sistemi", live: "Canlı Piyasa Fiyatları", ounce: "Dünya Altını (XAU/USD)", emami: "Emami Altın", gram: "18 Ayar Gram", analysis: "Kapsamlı Analiz (16 Faktör)", desc: "Üç katmanlı temel ve teknik onay aktif.", signal: "MT5 Forex Sinyali", copy: "Parametreleri Kopyala", active: "Bulut Sunucu Aktif" },
+            ru: { title: "Супер-приложение Золото и Форекс", subtitle: "Глобальная система анализа и сигналов", live: "Текущие курсы рынка", ounce: "Золото (XAU/USD)", emami: "Монета Имами", gram: "Золото 18к (грамм)", analysis: "Мастер-анализ (16 факторов)", desc: "Трехслойное подтверждение активно.", signal: "Форекс Сигнал MT5", copy: "Копировать параметры", active: "Облачный сервер активен" },
+            es: { title: "Super App de Oro y Forex", subtitle: "Sistema global de análisis y señales de oro", live: "Precios en vivo del mercado", ounce: "Oro Mundial (XAU/USD)", emami: "Moneda Emami", gram: "Oro 18k (gramo)", analysis: "Análisis Maestro (16 Factores)", desc: "Confirmación fundamental y técnica activa.", signal: "Señal Forex MT5", copy: "Copiar Parámetros", active: "Servidor Cloud Activo" },
+            de: { title: "Global Gold & Forex Super App", subtitle: "Globales System für Goldanalyse & Signale", live: "Live-Marktpreise", ounce: "Weltgold (XAU/USD)", emami: "Emami Münze", gram: "18K Gold Gramm", analysis: "Master-Analyse (16 Faktoren)", desc: "Dreifache fundamentale & technische Bestätigung aktiv.", signal: "MT5 Forex Signal", copy: "Parameter kopieren", active: "Cloud-Server Aktiv" }
+        };
+
+        function changeLanguage(lang) {
+            const t = translations[lang] || translations.en;
+            document.getElementById('t-title').innerText = t.title;
+            document.getElementById('t-subtitle').innerText = t.subtitle;
+            document.getElementById('t-live').innerText = t.live;
+            document.getElementById('t-ounce').innerText = t.ounce;
+            document.getElementById('t-emami').innerText = t.emami;
+            document.getElementById('t-gram').innerText = t.gram;
+            document.getElementById('t-analysis').innerText = t.analysis;
+            document.getElementById('t-analysis-desc').innerText = t.desc;
+            document.getElementById('t-signal').innerText = t.signal;
+            document.getElementById('t-copy').innerText = t.copy;
+            document.getElementById('status-text').innerText = t.active;
+
+            if(['ar', 'fa'].includes(lang)) {
+                document.getElementById('html-root').setAttribute('dir', 'rtl');
+            } else {
+                document.getElementById('html-root').setAttribute('dir', 'ltr');
+            }
+        }
+
+        function copySignal() {
+            navigator.clipboard.writeText("XAUUSD LONG\nEntry: 2650.0\nSL: 2642.0\nTP1: 2668.0");
+            tg.showAlert("Signal parameters copied successfully!");
+        }
+    </script>
+</body>
+</html>
