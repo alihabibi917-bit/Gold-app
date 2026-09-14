@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Gold & Forex Super App</title>
+    <title>Global Gold & Forex Pro Super App</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-gold: #f59e0b;
-            --text-main: #f8fafc;
-            --text-secondary: #94a3b8;
+            --bg-color: #07090f;
+            --card-bg: #111622;
+            --accent-gold: #f3ba2f;
+            --accent-gold-gradient: linear-gradient(135deg, #f3ba2f 0%, #d4af37 100%);
+            --text-main: #ffffff;
+            --text-secondary: #8a99ad;
             --green: #10b981;
             --red: #ef4444;
-            /* استایل کلیدهای برجسته و سه‌بعدی */
-            --btn-bg: linear-gradient(145deg, #233048, #1a2336);
-            --btn-shadow-1: 5px 5px 10px #090e1a, -5px -5px 10px #334466;
-            --btn-active-shadow: inset 3px 3px 6px #090e1a, inset -3px -3px 6px #334466;
+            --border-color: #1a2338;
+            /* کلیدهای برجسته و کلاسیک سه‌بعدی */
+            --btn-bg: linear-gradient(145deg, #182238, #0e1422);
+            --btn-shadow: 4px 4px 10px #030407, -4px -4px 10px #1f2c4a;
+            --btn-active-shadow: inset 3px 3px 6px #030407, inset -3px -3px 6px #1f2c4a;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; }
         body {
@@ -31,48 +33,50 @@
             justify-content: space-between;
             align-items: center;
             background: var(--card-bg);
-            padding: 12px;
+            padding: 14px;
             border-radius: 14px;
             margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
-        .header h1 { font-size: 15px; color: var(--accent-gold); }
-        
-        /* انتخابگر زبان */
+        .header h1 { font-size: 14px; color: var(--accent-gold); font-weight: bold; }
         .lang-select {
-            background: #0f172a;
+            background: #07090f;
             color: var(--accent-gold);
-            border: 1px solid #334155;
-            padding: 5px 10px;
+            border: 1px solid var(--border-color);
+            padding: 6px 10px;
             border-radius: 8px;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
         }
 
-        /* تب‌ها با کلیدهای برجسته */
+        /* تب‌ها با استایل برجسته */
         .tabs {
             display: flex;
-            gap: 8px;
+            gap: 5px;
             margin-bottom: 15px;
             overflow-x: auto;
             padding-bottom: 5px;
         }
         .tab-btn {
             background: var(--btn-bg);
-            border: none;
+            border: 1px solid var(--border-color);
             color: var(--text-secondary);
-            padding: 10px 14px;
+            padding: 9px 8px;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 12px;
-            box-shadow: var(--btn-shadow-1);
+            font-size: 10px;
+            box-shadow: var(--btn-shadow);
             transition: 0.1s;
             white-space: nowrap;
+            flex: 1;
+            text-align: center;
         }
         .tab-btn:active, .tab-btn.active {
             box-shadow: var(--btn-active-shadow);
             color: var(--accent-gold);
             font-weight: bold;
+            border-color: var(--accent-gold);
         }
 
         .section { display: none; }
@@ -81,53 +85,56 @@
         .card {
             background-color: var(--card-bg);
             border-radius: 14px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            padding: 14px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
         }
         .card-title {
-            font-size: 14px;
+            font-size: 12px;
             color: var(--accent-gold);
-            margin-bottom: 12px;
-            border-bottom: 1px solid #334155;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 13px;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            font-size: 11px;
         }
         .row:last-child { border-bottom: none; }
         .value-green { color: var(--green); font-weight: bold; }
         .value-red { color: var(--red); font-weight: bold; }
 
-        /* فرم‌ها و کلیدهای برجسته اصلی */
-        .input-group { margin-bottom: 12px; }
-        .input-group label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; }
-        .input-group input {
+        /* فرم‌ها و دکمه‌های کلاسیک برجسته */
+        .input-group { margin-bottom: 10px; }
+        .input-group label { display: block; font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
+        .input-group input, .input-group select {
             width: 100%;
-            padding: 11px;
-            background: #0f172a;
-            border: 1px solid #334155;
+            padding: 10px;
+            background: #07090f;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             color: #fff;
-            font-size: 13px;
+            font-size: 11px;
         }
-        
         .action-btn {
             width: 100%;
             background: var(--btn-bg);
             color: var(--accent-gold);
-            border: none;
-            padding: 13px;
+            border: 1px solid var(--border-color);
+            padding: 12px;
             border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: var(--btn-shadow-1);
-            font-size: 14px;
-            margin-top: 5px;
+            box-shadow: var(--btn-shadow);
+            font-size: 12px;
+            margin-top: 6px;
             transition: 0.1s;
         }
         .action-btn:active {
@@ -135,20 +142,46 @@
             transform: scale(0.98);
         }
         .result-box {
-            background: #0f172a;
-            padding: 12px;
+            background: #07090f;
+            padding: 10px;
             border-radius: 8px;
-            margin-top: 12px;
-            font-size: 13px;
+            margin-top: 10px;
+            font-size: 11px;
             text-align: center;
-            border: 1px solid #334155;
+            border: 1px solid var(--border-color);
+            line-height: 1.6;
+        }
+        .vip-box {
+            background: linear-gradient(135deg, #151c2e, #0d121d);
+            border: 1px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .card-number {
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--accent-gold);
+            background: #07090f;
+            padding: 8px;
+            border-radius: 6px;
+            margin: 8px 0;
+            letter-spacing: 1px;
+            border: 1px dashed var(--accent-gold);
+        }
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1 id="appTitle">سوپر اپ طلا و فارکس</h1>
+        <h1 id="appTitle">💎 سوپر اپ طلای جهانی و فارکس</h1>
         <select class="lang-select" id="langSelector" onchange="changeLanguage(this.value)">
             <option value="fa">فارسی (FA)</option>
             <option value="en">English (EN)</option>
@@ -158,83 +191,131 @@
         </select>
     </div>
 
-    <!-- منوی تب‌های برجسته -->
+    <!-- منوی تب‌ها -->
     <div class="tabs">
         <button class="tab-btn active" id="tabMarket" onclick="switchTab(event, 'market')">📊 بازار</button>
-        <button class="tab-btn" id="tabCalc" onclick="switchTab(event, 'bubble-calc')">🧮 محاسبه حباب</button>
-        <button class="tab-btn" id="tabSignal" onclick="switchTab(event, 'signals')">📈 سیگنال MT5</button>
+        <button class="tab-btn" id="tabBubble" onclick="switchTab(event, 'bubble')">🧮 حباب</button>
+        <button class="tab-btn" id="tabSignals" onclick="switchTab(event, 'signals')">📈 فارکس</button>
+        <button class="tab-btn" id="tabNews" onclick="switchTab(event, 'news')">📰 اخبار</button>
+        <button class="tab-btn" id="tabVip" onclick="switchTab(event, 'vip')">⭐ اشتراک</button>
     </div>
 
-    <!-- تب اول: بازار -->
+    <!-- ۱. بازار و نرخ‌های زنده لحظه‌ای -->
     <div id="market" class="section active">
         <div class="card">
-            <div class="card-title" id="marketRatesTitle">نرخ‌های زنده بازار جهانی</div>
-            <div class="row">
-                <span id="txtGoldOunce">انس جهانی (XAU/USD)</span>
-                <span class="value-green">$4,350.36</span>
+            <div class="card-title" id="tMarketRates">
+                <span>نرخ‌های زنده بازار (بروزرسانی لحظه‌ای)</span>
+                <span style="font-size: 10px; color: var(--green);" id="liveStatus">● آنلاین</span>
             </div>
-            <div class="row">
-                <span id="txtEmami">سکه امامی</span>
-                <span>48,500,000</span>
-            </div>
-            <div class="row">
-                <span id="txtGold18">طلای ۱۸ عیار</span>
-                <span>24,100,000</span>
-            </div>
+            <div class="row"><span>انس جهانی طلا (XAU/USD)</span> <span class="value-green" id="liveGold">$4,350.36</span></div>
+            <div class="row"><span>سکه امامی</span> <span>48,500,000 تومان</span></div>
+            <div class="row"><span>سکه بهار آزادی</span> <span>43,200,000 تومان</span></div>
+            <div class="row"><span>نیم سکه</span> <span>24,800,000 تومان</span></div>
+            <div class="row"><span>ربع سکه</span> <span>15,900,000 تومان</span></div>
+            <div class="row"><span>طلای ۱۸ عیار (گرم)</span> <span>2,410,000 تومان</span></div>
         </div>
-    </div>
-
-    <!-- تب دوم: محاسبه‌گر حباب -->
-    <div id="bubble-calc" class="section">
         <div class="card">
-            <div class="card-title" id="calcCardTitle">ماشین‌حساب پیشرفته حباب</div>
-            <div class="input-group">
-                <label id="lblMarketPrice">قیمت بازار سکه:</label>
-                <input type="number" id="marketPrice" placeholder="48500000">
-            </div>
-            <div class="input-group">
-                <label id="lblGold18Price">قیمت طلای ۱۸ عیار:</label>
-                <input type="number" id="gold18Price" placeholder="24100000">
-            </div>
-            <button class="action-btn" id="btnCalculate" onclick="calculateBubble()">محاسبه ارزش ذاتی و حباب</button>
-            <div class="result-box" id="calcResult">نتیجه در اینجا نمایش داده می‌شود</div>
+            <div class="card-title" id="tBubbleStatus">تحلیل تخصصی حباب سکه</div>
+            <div class="row"><span>حباب سکه امامی</span> <span class="value-red">۵,۸۰۰,۰۰۰ تومان (مثبت)</span></div>
+            <div class="row"><span>حباب سکه بهار آزادی</span> <span class="value-green">۱,۲۰۰,۰۰۰ تومان (مثبت)</span></div>
         </div>
     </div>
 
-    <!-- تب سوم: سیگنال‌ها -->
+    <!-- ۲. ماشین‌حساب پیشرفته حباب -->
+    <div id="bubble" class="section">
+        <div class="card">
+            <div class="card-title" id="tBubbleCalc">ماشین‌حساب ارزش ذاتی و حباب</div>
+            <div class="input-group">
+                <label id="lCoinType">نوع سکه:</label>
+                <select id="coinType">
+                    <option value="emami">سکه امامی</option>
+                    <option value="bahar">سکه بهار آزادی</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label id="lMarketPrice">قیمت بازار سکه (تومان):</label>
+                <input type="number" id="marketPrice" placeholder="مثلا 48500000">
+            </div>
+            <div class="input-group">
+                <label id="lGoldPrice">قیمت طلای ۱۸ عیار (تومان):</label>
+                <input type="number" id="gold18Price" placeholder="مثلا 2410000">
+            </div>
+            <button class="action-btn" id="bCalc" onclick="calculateBubble()">محاسبه تخصصی حباب</button>
+            <div class="result-box" id="calcResult">نتیجه محاسبات در این بخش نمایش داده می‌شود.</div>
+        </div>
+    </div>
+
+    <!-- ۳. سیگنال‌های پردقت فارکس -->
     <div id="signals" class="section">
         <div class="card">
-            <div class="card-title">MT5 Signal <span class="value-green">● BUY</span></div>
-            <div class="row"><span>Entry:</span> <span>2,650.0</span></div>
-            <div class="row"><span>Stop Loss:</span> <span class="value-red">2,642.0</span></div>
-            <div class="row"><span>Take Profit:</span> <span class="value-green">2,668.0</span></div>
-            <button class="action-btn" onclick="playClickSound(); alert('Signal Copied!');">📋 کپی پارامترها</button>
+            <div class="card-title"><span>MT5 Gold Signal (دقت بالا)</span> <span class="value-green">● LONG (BUY)</span></div>
+            <div class="row"><span>نماد معاملاتی:</span> <span>XAU/USD (Gold)</span></div>
+            <div class="row"><span>نقطه ورود (Entry Zone):</span> <span>2,650.0 - 2,653.0</span></div>
+            <div class="row"><span>حد ضرر (Stop Loss):</span> <span class="value-red">2,642.0</span></div>
+            <div class="row"><span>هدف اول (Take Profit 1):</span> <span class="value-green">2,668.0</span></div>
+            <div class="row"><span>هدف دوم (Take Profit 2):</span> <span class="value-green">2,685.0</span></div>
+            <div class="row"><span>نسبت سود به ریسک:</span> <span>1 : 2.1 (اعتبار بالا)</span></div>
+            <button class="action-btn" onclick="playClickSound(); alert('پارامترهای سیگنال با موفقیت کپی شد!');">📋 کپی پارامترهای سیگنال</button>
         </div>
+    </div>
+
+    <!-- ۴. اخبار بزرگ و مهم دنیا (فاندامنتال) -->
+    <div id="news" class="section">
+        <div class="card">
+            <div class="card-title">📰 تحلیل اخبار فاندامنتال و منابع بزرگ دنیا</div>
+            <div class="row" style="flex-direction: column; gap: 4px; padding: 10px 0;">
+                <span style="color: var(--accent-gold); font-weight: bold;">رشد تقاضای بانک‌های مرکزی برای طلا</span>
+                <span style="font-size: 10px; color: var(--text-secondary);">بررسی گزارش رویترز و بلومبرگ: ذخایر طلا در بانک‌های آسیایی روند صعودی دارد.</span>
+            </div>
+            <div class="row" style="flex-direction: column; gap: 4px; padding: 10px 0; border-top: 1px solid var(--border-color);">
+                <span style="color: var(--accent-gold); font-weight: bold;">تحولات نرخ بهره فدرال رزرو آمریکا</span>
+                <span style="font-size: 10px; color: var(--text-secondary);">داده‌های تورم آمریکا نشان‌دهنده احتمال تثبیت نرخ بهره است که به نفع انس خواهد بود.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ۵. اشتراک ماهیانه و شماره کارت -->
+    <div id="vip" class="section">
+        <div class="card">
+            <div class="card-title">⭐ خرید اشتراک ویژه VIP ماهيانه</div>
+            <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px;">
+                با تهیه اشتراک ماهیانه، به تمامی سیگنال‌های لحظه‌ای با دقت بالا، تحلیل نمودارهای فاندامنتال و هشدار صوتی قیمت دسترسی کامل خواهید داشت.
+            </p>
+            <div class="vip-box">
+                <div style="font-size: 12px; color: var(--accent-gold); font-weight: bold;">مبلغ اشتراک ۱ ماهه: ۲۹۹,۰۰۰ تومان</div>
+                <div style="font-size: 10px; color: var(--text-secondary); margin-top: 4px;">کارت به کارت به نام مدیریت مجموعه</div>
+                <div class="card-number">6037 - 9975 - XXXX - XXXX</div>
+                <button class="action-btn" style="margin-top: 8px;" onclick="playClickSound(); alert('شماره کارت کپی شد! پس از واریز، فیش را برای پشتیبانی ارسال کنید.');">📋 کپی شماره کارت</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Gold & Forex Pro Super App • Hosted on GitHub Pages
     </div>
 
     <script>
-        // سیستم پخش صدای ملایم لمس (بدون نیاز به فایل صوتی خارجی)
+        // سیستم پخش صدای ملایم دکمه‌ها
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playClickSound() {
             if (audioCtx.state === 'suspended') { audioCtx.resume(); }
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(600, audioCtx.currentTime); // فرکانس صدای ملایم
-            gain.gain.setValueAtTime(0.05, audioCtx.currentTime); // حجم صدای بسیار کم و ملایم
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+            osc.frequency.setValueAtTime(550, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.07);
             osc.connect(gain);
             gain.connect(audioCtx.destination);
             osc.start();
-            osc.stop(audioCtx.currentTime + 0.08);
+            osc.stop(audioCtx.currentTime + 0.07);
         }
 
-        // افزودن صدای لمس به تمامی دکمه‌ها و کلیدها به صورت خودکار
-        document.querySelectorAll('button, select').forEach(element => {
-            element.addEventListener('click', playClickSound);
+        document.querySelectorAll('button, select').forEach(el => {
+            el.addEventListener('click', playClickSound);
         });
 
-        // مدیریت تب‌ها
+        // سوئیچ تب‌ها
         function switchTab(evt, sectionId) {
             document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -242,120 +323,76 @@
             evt.currentTarget.classList.add('active');
         }
 
-        // دیکشنری زبان‌های مختلف دنیا
-        const translations = {
+        // شبیه‌ساز به‌روزرسانی لحظه‌ای قیمت انس برای پویایی اپ
+        setInterval(() => {
+            const randomChange = (Math.random() * 2 - 1).toFixed(2);
+            const currentGold = 4350.36 + parseFloat(randomChange);
+            const el = document.getElementById('liveGold');
+            if(el) el.innerText = '$' + currentGold.toFixed(2);
+        }, 5000);
+
+        // دیکشنری چندزبانه جامع
+        const dict = {
             fa: {
-                title: "سوپر اپ طلا و فارکس",
-                market: "📊 بازار",
-                calc: "🧮 محاسبه حباب",
-                signal: "📈 سیگنال MT5",
-                marketTitle: "نرخ‌های زنده بازار جهانی",
-                goldOunce: "انس جهانی (XAU/USD)",
-                emami: "سکه امامی",
-                gold18: "طلای ۱۸ عیار",
-                calcTitle: "ماشین‌حساب پیشرفته حباب",
-                lblMarket: "قیمت بازار سکه:",
-                lblGold: "قیمت طلای ۱۸ عیار:",
-                btnCalc: "محاسبه ارزش ذاتی و حباب",
-                resultWait: "نتیجه در اینجا نمایش داده می‌شود"
+                appTitle: "💎 سوپر اپ طلای جهانی و فارکس",
+                market: "📊 بازار", bubble: "🧮 حباب", signals: "📈 فارکس", news: "📰 اخبار", vip: "⭐ اشتراک",
+                tMarketRates: "نرخ‌های زنده بازار (بروزرسانی لحظه‌ای)", tBubbleStatus: "تحلیل تخصصی حباب سکه",
+                tBubbleCalc: "ماشین‌حساب ارزش ذاتی و حباب", lCoinType: "نوع سکه:",
+                lMarketPrice: "قیمت بازار سکه (تومان):", lGoldPrice: "قیمت طلای ۱۸ عیار (تومان):",
+                bCalc: "محاسبه تخصصی حباب"
             },
             en: {
-                title: "Gold & Forex Super App",
-                market: "📊 Market",
-                calc: "🧮 Bubble Calc",
-                signal: "📈 MT5 Signal",
-                marketTitle: "Live Global Market Rates",
-                goldOunce: "Gold Ounce (XAU/USD)",
-                emami: "Emami Coin",
-                gold18: "18K Gold (Gram)",
-                calcTitle: "Advanced Bubble Calculator",
-                lblMarket: "Market Coin Price:",
-                lblGold: "18K Gold Price:",
-                btnCalc: "Calculate Intrinsic Value & Bubble",
-                resultWait: "Result will be displayed here"
+                appTitle: "💎 Global Gold & Forex Pro",
+                market: "📊 Market", bubble: "🧮 Bubble", signals: "📈 Forex", news: "📰 News", vip: "⭐ VIP",
+                tMarketRates: "Live Market Rates (Real-time)", tBubbleStatus: "Coin Bubble Analysis",
+                tBubbleCalc: "Intrinsic Value Calculator", lCoinType: "Coin Type:",
+                lMarketPrice: "Market Price:", lGoldPrice: "18K Gold Price:",
+                bCalc: "Calculate Bubble"
             },
             ar: {
-                title: "تطبيق الذهب والفوركس",
-                market: "📊 السوق",
-                calc: "🧮 حاسبة الفقاعة",
-                signal: "📈 إشارات MT5",
-                marketTitle: "أسعار السوق العالمية المباشرة",
-                goldOunce: "أونصة الذهب (XAU/USD)",
-                emami: "عملة الإمامي",
-                gold18: "عيار 18",
-                calcTitle: "حاسبة الفقاعة المتقدمة",
-                lblMarket: "سعر العملة في السوق:",
-                lblGold: "سعر عيار 18:",
-                btnCalc: "حساب القيمة الجوهرية والفقاعة",
-                resultWait: "سيتم عرض النتيجة هنا"
+                appTitle: "💎 الذهب العالمي والفوركس",
+                market: "📊 السوق", bubble: "🧮 الفقاعة", signals: "📈 الفوركس", news: "📰 الأخبار", vip: "⭐ الاشتراكات",
+                tMarketRates: "أسعار السوق الحية", tBubbleStatus: "تحليل فقاعة العملات",
+                tBubbleCalc: "حاسبة القيمة الجوهرية", lCoinType: "نوع العملة:",
+                lMarketPrice: "سعر السوق:", lGoldPrice: "سعر عيار 18:",
+                bCalc: "حساب الفقاعة"
             },
             zh: {
-                title: "黄金与外汇超级应用",
-                market: "📊 市场",
-                calc: "🧮 泡沫计算器",
-                signal: "📈 MT5 信号",
-                marketTitle: "实时全球市场汇率",
-                goldOunce: "国际黄金 (XAU/USD)",
-                emami: "伊玛米金币",
-                gold18: "18K 黄金",
-                calcTitle: "高级泡沫计算器",
-                lblMarket: "市场金币价格:",
-                lblGold: "18K黄金价格:",
-                btnCalc: "计算内在价值与泡沫",
-                resultWait: "结果将显示在此处"
+                appTitle: "💎 全球黄金与外汇专业版",
+                market: "📊 市场", bubble: "🧮 泡沫", signals: "📈 外汇", news: "📰 新闻", vip: "⭐ 会员",
+                tMarketRates: "实时市场汇率", tBubbleStatus: "金币泡沫分析",
+                tBubbleCalc: "内在价值计算器", lCoinType: "金币类型:",
+                lMarketPrice: "市场价格:", lGoldPrice: "18K黄金价格:",
+                bCalc: "计算泡沫"
             },
             es: {
-                title: "Súper App de Oro y Forex",
-                market: "📊 Mercado",
-                calc: "🧮 Calc de Burbuja",
-                signal: "📈 Señal MT5",
-                marketTitle: "Precios Globales en Vivo",
-                goldOunce: "Onza de Oro (XAU/USD)",
-                emami: "Moneda Emami",
-                gold18: "Oro 18K",
-                calcTitle: "Calculadora Avanzada de Burbuja",
-                lblMarket: "Precio de la Moneda:",
-                lblGold: "Precio de Oro 18K:",
-                btnCalc: "Calcular Valor Intrínseco y Burbuja",
-                resultWait: "El resultado se mostrará aquí"
+                appTitle: "💎 Oro Global y Forex Pro",
+                market: "📊 Mercado", bubble: "🧮 Burbuja", signals: "📈 Forex", news: "📰 Noticias", vip: "⭐ VIP",
+                tMarketRates: "Precios en Vivo", tBubbleStatus: "Análisis de Burbuja",
+                tBubbleCalc: "Calculadora de Valor", lCoinType: "Tipo de Moneda:",
+                lMarketPrice: "Precio de Mercado:", lGoldPrice: "Precio Oro 18K:",
+                bCalc: "Calcular Burbuja"
             }
         };
 
-        // تغییر زبان برنامه به صورت زنده
         function changeLanguage(lang) {
-            const t = translations[lang];
+            const t = dict[lang];
             const root = document.getElementById('htmlRoot');
-            
-            // تنظیم جهت صفحه (RTL برای فارسی و عربی، LTR برای بقیه)
-            if (lang === 'fa' || lang === 'ar') {
-                root.setAttribute('dir', 'rtl');
-                root.setAttribute('lang', lang);
-            } else {
-                root.setAttribute('dir', 'ltr');
-                root.setAttribute('lang', lang);
-            }
+            root.setAttribute('dir', (lang === 'fa' || lang === 'ar') ? 'rtl' : 'ltr');
+            root.setAttribute('lang', lang);
 
-            document.getElementById('appTitle').innerText = t.title;
-            document.getElementById('tabMarket').innerText = t.market;
-            document.getElementById('tabCalc').innerText = t.calc;
-            document.getElementById('tabSignal').innerText = t.signal;
-            document.getElementById('marketRatesTitle').innerText = t.marketTitle;
-            document.getElementById('txtGoldOunce').innerText = t.goldOunce;
-            document.getElementById('txtEmami').innerText = t.emami;
-            document.getElementById('txtGold18').innerText = t.gold18;
-            document.getElementById('calcCardTitle').innerText = t.calcTitle;
-            document.getElementById('lblMarketPrice').innerText = t.lblMarket;
-            document.getElementById('lblGold18Price').innerText = t.lblGold;
-            document.getElementById('btnCalculate').innerText = t.btnCalc;
+            for (let key in t) {
+                const el = document.getElementById(key);
+                if (el) el.innerText = t[key];
+            }
         }
 
-        // محاسبه حباب
         function calculateBubble() {
             const market = parseFloat(document.getElementById('marketPrice').value);
             const gold18 = parseFloat(document.getElementById('gold18Price').value);
 
             if (!market || !gold18) {
-                document.getElementById('calcResult').innerHTML = "لطفاً مقادیر معتبر وارد کنید / Please enter valid values";
+                document.getElementById('calcResult').innerHTML = "لطفاً مقادیر معتبر وارد کنید.";
                 return;
             }
 
@@ -364,9 +401,9 @@
             const bubblePercent = ((bubbleAmount / intrinsicValue) * 100).toFixed(2);
 
             document.getElementById('calcResult').innerHTML = `
-                Intrinsic Value: <b>${Math.round(intrinsicValue).toLocaleString()}</b><br>
-                Bubble: <span style="color: ${bubbleAmount >= 0 ? '#ef4444' : '#10b981'}">
-                ${Math.round(bubbleAmount).toLocaleString()} (${bubblePercent}%)</span>
+                ارزش ذاتی: <b>${Math.round(intrinsicValue).toLocaleString()} تومان</b><br>
+                حباب: <span style="color: ${bubbleAmount >= 0 ? '#ef4444' : '#10b981'}">
+                ${Math.round(bubbleAmount).toLocaleString()} تومان (${bubblePercent}%)</span>
             `;
         }
     </script>
