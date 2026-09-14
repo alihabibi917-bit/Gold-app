@@ -6,8 +6,8 @@
     <title>Gold & Forex Pro Super App</title>
     <style>
         :root {
-            --bg-color: #030508;
-            --card-bg: linear-gradient(145deg, #0d121f, #070a12);
+            --bg-color: #000000;
+            --card-bg: linear-gradient(145deg, #0c0c0c, #030303);
             --accent-gold: #ffd700;
             --accent-gold-gradient: linear-gradient(135deg, #ffe552 0%, #d4af37 50%, #aa771c 100%);
             --gold-border: rgba(212, 175, 55, 0.4);
@@ -15,14 +15,26 @@
             --text-secondary: #94a3b8;
             --green: #10b981;
             --red: #ef4444;
-            --border-color: #1e293b;
-            /* استایل دکمه‌های ۳ بعدی و برجسته لوکس */
-            --btn-bg: linear-gradient(145deg, #172033, #0b0f19);
-            --btn-shadow: 6px 6px 14px #010204, -6px -6px 14px #1b263e;
-            --btn-active-shadow: inset 3px 3px 6px #010204, inset -3px -3px 6px #1b263e;
+            --border-color: #1a1a1a;
+            --btn-bg: linear-gradient(145deg, #181818, #0a0a0a);
+            --btn-shadow: 6px 6px 14px #000000, -6px -6px 14px #1c1c1c;
+            --btn-active-shadow: inset 3px 3px 6px #000000, inset -3px -3px 6px #1c1c1c;
             --gold-btn-bg: linear-gradient(145deg, #dfbc44, #997412);
-            --gold-btn-shadow: 5px 5px 12px #020305, -5px -5px 12px #ffec76;
         }
+
+        [data-theme="cyber"] {
+            --bg-color: #060913; --card-bg: linear-gradient(145deg, #0d1222, #070a14); --accent-gold: #00ffcc; --gold-border: rgba(0, 255, 204, 0.4); --text-secondary: #8ab4f8; --border-color: #1e293b; --btn-bg: linear-gradient(145deg, #131c31, #080d19); --btn-shadow: 6px 6px 14px #020408, -6px -6px 14px #1a2744; --btn-active-shadow: inset 3px 3px 6px #020408, inset -3px -3px 6px #1a2744; --gold-btn-bg: linear-gradient(145deg, #00ffcc, #008b8b);
+        }
+        [data-theme="classic"] {
+            --bg-color: #0e1116; --card-bg: linear-gradient(145deg, #161b22, #0d1117); --accent-gold: #f0b90b; --gold-border: rgba(240, 185, 11, 0.3); --text-main: #e6edf3; --text-secondary: #8b949e; --border-color: #30363d; --btn-bg: linear-gradient(145deg, #21262d, #161b22); --btn-shadow: 5px 5px 12px #090b0e, -5px -5px 12px #1f242c; --btn-active-shadow: inset 3px 3px 6px #090b0e, inset -3px -3px 6px #1f242c; --gold-btn-bg: linear-gradient(145deg, #f0b90b, #b78103);
+        }
+        [data-theme="royal"] {
+            --bg-color: #0b0714; --card-bg: linear-gradient(145deg, #171026, #0e0a18); --accent-gold: #ffc837; --gold-border: rgba(255, 200, 55, 0.4); --text-secondary: #b3a9cc; --border-color: #271d3f; --btn-bg: linear-gradient(145deg, #221738, #100b1d); --btn-shadow: 6px 6px 14px #040207, -6px -6px 14px #261b3e; --btn-active-shadow: inset 3px 3px 6px #040207, inset -3px -3px 6px #261b3e; --gold-btn-bg: linear-gradient(145deg, #ffc837, #d46500);
+        }
+        [data-theme="titanium"] {
+            --bg-color: #121417; --card-bg: linear-gradient(145deg, #1e2229, #15181e); --accent-gold: #38ef7d; --gold-border: rgba(56, 239, 125, 0.3); --text-secondary: #a0aec0; --border-color: #2d3748; --btn-bg: linear-gradient(145deg, #282e38, #181b22); --btn-shadow: 6px 6px 14px #0a0b0d, -6px -6px 14px #222731; --btn-active-shadow: inset 3px 3px 6px #0a0b0d, inset -3px -3px 6px #222731; --gold-btn-bg: linear-gradient(145deg, #38ef7d, #11998e);
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
         body {
             background-color: var(--bg-color);
@@ -31,47 +43,40 @@
             max-width: 480px;
             margin: 0 auto;
             user-select: none;
+            transition: background 0.3s ease;
         }
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: var(--card-bg);
-            padding: 14px 16px;
-            border-radius: 18px;
-            margin-bottom: 14px;
+            padding: 12px 14px;
+            border-radius: 16px;
+            margin-bottom: 12px;
             border: 1px solid var(--gold-border);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8), inset 0 1px 2px rgba(255,215,0,0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
         }
-        .header h1 { font-size: 14px; color: var(--accent-gold); font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .lang-select {
-            background: #030508;
+        .header h1 { font-size: 13px; color: var(--accent-gold); font-weight: bold; }
+        .header-controls { display: flex; gap: 6px; align-items: center; }
+        .theme-select, .lang-select {
+            background: var(--bg-color);
             color: var(--accent-gold);
             border: 1px solid var(--gold-border);
-            padding: 6px 10px;
-            border-radius: 10px;
-            font-size: 11px;
+            padding: 5px 8px;
+            border-radius: 8px;
+            font-size: 10px;
             cursor: pointer;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
         }
-
-        /* منوی تب‌ها با طراحی برجسته */
-        .tabs {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 14px;
-            overflow-x: auto;
-            padding-bottom: 6px;
-        }
+        .tabs { display: flex; gap: 5px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 4px; }
         .tabs::-webkit-scrollbar { display: none; }
         .tab-btn {
             background: var(--btn-bg);
             border: 1px solid var(--border-color);
             color: var(--text-secondary);
-            padding: 11px 8px;
-            border-radius: 14px;
+            padding: 10px 6px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 10px;
+            font-size: 9.5px;
             box-shadow: var(--btn-shadow);
             transition: 0.2s;
             white-space: nowrap;
@@ -83,26 +88,23 @@
             color: var(--accent-gold);
             font-weight: bold;
             border-color: var(--accent-gold);
-            background: linear-gradient(145deg, #121926, #182238);
         }
-
         .section { display: none; }
         .section.active { display: block; }
-
         .card {
             background: var(--card-bg);
-            border-radius: 18px;
-            padding: 16px;
-            margin-bottom: 14px;
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 12px;
             border: 1px solid var(--gold-border);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
         }
         .card-title {
-            font-size: 12.5px;
+            font-size: 12px;
             color: var(--accent-gold);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
+            padding-bottom: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -111,120 +113,146 @@
         .row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            font-size: 11.5px;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            font-size: 11px;
         }
         .row:last-child { border-bottom: none; }
         .value-green { color: var(--green); font-weight: bold; }
         .value-red { color: var(--red); font-weight: bold; }
-
-        .input-group { margin-bottom: 12px; }
-        .input-group label { display: block; font-size: 11px; color: var(--text-secondary); margin-bottom: 5px; }
+        .input-group { margin-bottom: 10px; }
+        .input-group label { display: block; font-size: 10.5px; color: var(--text-secondary); margin-bottom: 4px; }
         .input-group input, .input-group select {
             width: 100%;
-            padding: 11px;
-            background: #030508;
+            padding: 10px;
+            background: var(--bg-color);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 11.5px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
-        }
-        .input-group input:focus, .input-group select:focus {
-            border-color: var(--accent-gold);
-            outline: none;
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 11px;
         }
         .action-btn {
             width: 100%;
             background: var(--gold-btn-bg);
-            color: #030508;
-            border: 1px solid #ffe552;
-            padding: 13px;
-            border-radius: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
-            font-size: 12.5px;
-            margin-top: 8px;
-            transition: 0.2s;
-        }
-        .action-btn:active {
-            transform: scale(0.97);
-            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);
-        }
-        .secondary-btn {
-            background: var(--btn-bg);
-            color: var(--accent-gold);
-            border: 1px solid var(--gold-border);
-            box-shadow: var(--btn-shadow);
-        }
-        .info-box {
-            background: rgba(212, 175, 55, 0.05);
-            border: 1px dashed var(--accent-gold);
+            color: #000;
+            border: 1px solid var(--accent-gold);
             padding: 12px;
             border-radius: 12px;
-            font-size: 11px;
-            color: #e2e8f0;
-            margin-top: 10px;
-            line-height: 1.6;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: var(--btn-shadow);
+            font-size: 12px;
+            margin-top: 6px;
+            transition: 0.15s;
+        }
+        .action-btn:active { transform: scale(0.97); }
+        .secondary-btn { background: var(--btn-bg); color: var(--accent-gold); border: 1px solid var(--gold-border); }
+        .info-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px dashed var(--accent-gold);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 10.5px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            line-height: 1.5;
             display: none;
+        }
+
+        /* افکت چشمک‌زن (روشن و خاموش شدن لامپ هشدار) */
+        @keyframes blinkLamp {
+            0% { opacity: 1; border-color: var(--red); box-shadow: 0 0 15px var(--red); }
+            50% { opacity: 0.3; border-color: #331111; box-shadow: none; }
+            100% { opacity: 1; border-color: var(--red); box-shadow: 0 0 15px var(--red); }
         }
         .alarm-box {
             background: rgba(239, 68, 68, 0.08);
-            border: 1px solid var(--red);
-            padding: 11px 14px;
-            border-radius: 14px;
-            font-size: 11px;
-            color: #fca5a5;
-            margin-bottom: 14px;
-            line-height: 1.6;
-            box-shadow: 0 4px 12px rgba(239,68,68,0.15);
-        }
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .social-link {
-            background: #030508;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--red);
             padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 11px;
-            transition: 0.2s;
+            border-radius: 12px;
+            font-size: 10.5px;
+            color: #fca5a5;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            animation: blinkLamp 1s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .social-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-top: 8px; }
+        .social-link {
+            background: var(--bg-color); border: 1px solid var(--border-color); padding: 9px; border-radius: 8px; text-align: center; color: var(--text-main); text-decoration: none; font-size: 10.5px;
         }
         .social-link:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
-        .footer {
-            text-align: center;
-            font-size: 10px;
-            color: var(--text-secondary);
-            margin-top: 18px;
-            letter-spacing: 0.5px;
-        }
+        .footer { text-align: center; font-size: 9.5px; color: var(--text-secondary); margin-top: 15px; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
+    <!-- تولید صدای کلیک و آژیر با Web Audio API (بدون نیاز به فایل خارجی) -->
+    <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playClickSound() {
+            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.04);
+            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.04);
+        }
+
+        function playSirenSound() {
+            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+            let now = audioCtx.currentTime;
+            for(let i=0; i<3; i++) {
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(600, now + (i * 0.3));
+                osc.frequency.linearRampToValueAtTime(1100, now + (i * 0.3) + 0.15);
+                osc.frequency.linearRampToValueAtTime(600, now + (i * 0.3) + 0.3);
+                gain.gain.setValueAtTime(0.1, now + (i * 0.3));
+                gain.gain.linearRampToValueAtTime(0.01, now + (i * 0.3) + 0.3);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now + (i * 0.3));
+                osc.stop(now + (i * 0.3) + 0.3);
+            }
+        }
+
+        // افزودن اتوماتیک صدای کلیک به تمام دکمه‌ها و المان‌های تعاملی
+        document.addEventListener('click', (e) => {
+            if(e.target.tagName === 'BUTTON' || e.target.tagName === 'SELECT' || e.target.tagName === 'A') {
+                playClickSound();
+            }
+        });
+    </script>
+
     <div class="header">
-        <h1>⚜️ سوپر اپ تخصصی طلا و فارکس</h1>
-        <select class="lang-select" id="langSelector" onchange="changeLanguage(this.value)">
-            <option value="fa">🇮🇷 فارسی (FA)</option>
-            <option value="en">🇺🇸 English (EN)</option>
-            <option value="ar">🇸🇦 العربية (AR)</option>
-            <option value="zh">🇨🇳 中文 (ZH)</option>
-            <option value="tr">🇹🇷 Türkçe (TR)</option>
-            <option value="ru">🇷🇺 Русский (RU)</option>
-            <option value="de">🇩🇪 Deutsch (DE)</option>
-            <option value="fr">🇫🇷 Français (FR)</option>
-        </select>
+        <h1>⚜️ سوپر اپ طلا و فارکس</h1>
+        <div class="header-controls">
+            <select class="theme-select" id="themeSelector" onchange="changeTheme(this.value)">
+                <option value="luxury">🎨 گلد لوکس</option>
+                <option value="cyber">💻 سایبر نئون</option>
+                <option value="classic">📊 تریدینگ</option>
+                <option value="royal">👑 رویال</option>
+                <option value="titanium">⚡ تیتانیوم</option>
+            </select>
+            <select class="lang-select" id="langSelector">
+                <option value="fa">🇮🇷 FA</option>
+                <option value="en">🇺🇸 EN</option>
+                <option value="ar">🇸🇦 AR</option>
+            </select>
+        </div>
     </div>
 
-    <!-- منوی تب‌های حرفه‌ای و برجسته -->
     <div class="tabs">
         <button class="tab-btn active" onclick="switchTab(event, 'coins')">🪙 سکه</button>
         <button class="tab-btn" onclick="switchTab(event, 'gold')">🥇 طلا</button>
@@ -233,179 +261,142 @@
         <button class="tab-btn" onclick="switchTab(event, 'admin')" style="color: var(--accent-gold);">⚙️ مدیریت</button>
     </div>
 
-    <!-- ۱. بخش سکه و تحلیل حباب همراه با دکمه اطلاعات معتبر -->
+    <!-- بخش سکه همراه با لامپ چشمک‌زن و آژیر متحرک -->
     <div id="coins" class="section active">
-        <div class="alarm-box">
-            🚨 <b>آلارم فوری بازار:</b> حباب سکه امامی به مرز هشدار رسیده است. پیشنهاد کارشناسان تعویض پله‌ای سکه‌های حباب‌دار با طلای آب‌شده بدون حباب است.
+        <div class="alarm-box" onclick="playSirenSound()">
+            <div>
+                🚨 <b>لامپ هشدار بحران بازار:</b> حباب سکه امامی به مرز هشدار رسیده است! <span style="font-size:9px; display:block; color:#fff;">(برای تست آژیر صوتی ضربه بزنید 🔊)</span>
+            </div>
+            <div style="font-size: 18px;" id="blinkingBulb">🔴</div>
         </div>
+
         <div class="card">
             <div class="card-title">
-                <span>نرخ زنده و تحلیل حباب سکه‌ها</span>
-                <span style="font-size: 10px; color: var(--green);">● بروزرسانی آنی</span>
+                <span>نرخ و تحلیل حباب سکه‌ها</span>
+                <span style="font-size: 9.5px; color: var(--green);">● آنلاین</span>
             </div>
+            <div class="row"><span>سکه امامی</span> <span style="font-weight: bold;">48,500,000 تومان</span></div>
+            <div class="row" style="font-size: 10px; color: var(--text-secondary);"><span>حباب: ۵.۸ م (سنگین)</span> <span class="value-red">⚠️ فروش/تعویض</span></div>
+            <div class="row" style="border-top:1px solid var(--border-color); margin-top:4px; padding-top:6px;"><span>سکه بهار آزادی</span> <span style="font-weight: bold;">43,200,000 تومان</span></div>
+            <div class="row" style="font-size: 10px; color: var(--text-secondary);"><span>حباب: ۱.۲ م (متعادل)</span> <span class="value-green">✅ خرید پله‌ای</span></div>
             
-            <div style="padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-                <div class="row"><span>سکه امامی</span> <span style="font-weight: bold;">48,500,000 تومان</span></div>
-                <div class="row" style="font-size: 10px; color: var(--text-secondary);">
-                    <span>حباب: ۵,۸۰۰,۰۰۰ ت (سنگین)</span> 
-                    <span class="value-red">⚠️ پیشنهاد: فروش / تعویض</span>
-                </div>
-            </div>
-
-            <div style="padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-                <div class="row"><span>سکه بهار آزادی</span> <span style="font-weight: bold;">43,200,000 تومان</span></div>
-                <div class="row" style="font-size: 10px; color: var(--text-secondary);">
-                    <span>حباب: ۱,۲۰۰,۰۰۰ ت (متعادل)</span> 
-                    <span class="value-green">✅ پیشنهاد: خرید پله‌ای</span>
-                </div>
-            </div>
-
-            <div style="padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-                <div class="row"><span>نیم سکه</span> <span style="font-weight: bold;">24,800,000 تومان</span></div>
-                <div class="row" style="font-size: 10px; color: var(--text-secondary);">
-                    <span>حباب: ۳,۱۰۰,۰۰۰ ت (بالا)</span> 
-                    <span style="color: #ffd700;">⏸️ پیشنهاد: نگهداری / خنثی</span>
-                </div>
-            </div>
-
-            <div style="padding: 8px 0;">
-                <div class="row"><span>ربع سکه</span> <span style="font-weight: bold;">15,900,000 تومان</span></div>
-                <div class="row" style="font-size: 10px; color: var(--text-secondary);">
-                    <span>حباب: ۴,۵۰۰,۰۰۰ ت (کاذب)</span> 
-                    <span class="value-red">❌ پیشنهاد: عدم خرید</span>
-                </div>
-            </div>
-
-            <button class="action-btn secondary-btn" onclick="toggleInfo('coinInfoBox')">📖 اطلاعات بروز و تخصصی بازار سکه</button>
+            <button class="action-btn secondary-btn" onclick="toggleInfo('coinInfoBox')">📖 اطلاعات تخصصی بازار سکه</button>
             <div id="coinInfoBox" class="info-box">
-                <b>📌 تحلیل و نکات معتبر سکه:</b><br>
-                • حباب سکه نشان‌دهنده تقاضای احساسی بازار است. هرگاه حباب ربع سکه یا سکه امامی بیش از حد بزرگ شود، ریسک اصلاح قیمتی شدید بالا می‌رود.<br>
-                • سکه طرح قدیم (بهار آزادی) معمولاً حباب کمتری نسبت به امامی دارد و برای سرمایه‌گذاری امن‌تر است.<br>
-                • از منابع رسمی بانک مرکزی و اتحادیه طلا برای تایید اصالتکیف و پلمپ سکه استفاده کنید.
+                • حباب سکه احساسی است؛ ربع سکه بیشترین ریسک حباب کاذب را دارد.<br>
+                • سکه بهار آزادی (طرح قدیم) حباب معقول‌تری دارد.<br>
+                • همیشه از صرافی‌های دارای مجوز اتحادیه خرید کنید.
             </div>
         </div>
 
         <div class="card">
             <div class="card-title">🧮 محاسبه‌گر هوشمند ارزش ذاتی سکه</div>
             <div class="input-group">
-                <label>انتخاب نوع سکه:</label>
+                <label>نوع سکه:</label>
                 <select id="calcCoinType">
-                    <option value="emami">سکه امامی (وزن ۷.۳۲۲ گرم)</option>
-                    <option value="bahar">سکه بهار آزادی (وزن ۷.۳۲۲ گرم)</option>
+                    <option value="emami">سکه امامی (۷.۳۲۲ گرم)</option>
+                    <option value="bahar">سکه بهار آزادی (۷.۳۲۲ گرم)</option>
                 </select>
             </div>
             <div class="input-group">
                 <label>قیمت کنونی بازار (تومان):</label>
                 <input type="number" id="marketCoinPrice" value="48500000">
             </div>
-            <button class="action-btn" onclick="calculateCoinBubble()">محاسبه اتوماتیک حباب و سود/زیان</button>
-            <div class="result-box" id="coinBubbleResult" style="background:#030508; padding:12px; border-radius:10px; margin-top:10px; font-size:11.5px; text-align:center; border:1px solid var(--border-color);">نتیجه محاسبات اینجا ظاهر می‌شود</div>
+            <button class="action-btn" onclick="calculateCoinBubble()">محاسبه اتوماتیک حباب</button>
+            <div class="result-box" id="coinBubbleResult" style="background:var(--bg-color); padding:10px; border-radius:8px; margin-top:8px; font-size:11px; text-align:center; border:1px solid var(--border-color);">نتیجه محاسبات اینجا ظاهر می‌شود</div>
         </div>
     </div>
 
-    <!-- ۲. بخش طلا (آب‌شده، نو، مستعمل) با قیمت پایه اتوماتیک و دکمه اطلاعات -->
+    <!-- بخش طلا -->
     <div id="gold" class="section">
         <div class="card">
-            <div class="card-title">🥇 محاسبات جامع بازار طلا (آب‌شده، نو و مستعمل)</div>
-            
+            <div class="card-title">🥇 محاسبه‌گر جامع بازار طلا</div>
             <div class="input-group">
                 <label>نوع معامله طلا:</label>
-                <select id="goldTypeSelect" onchange="updateGoldBaseDisplay()">
-                    <option value="melted">طلای آب‌شده (بدون اجرت و سود - بهترین سرمایه)</option>
-                    <option value="used">طلای مستعمل / دست‌دوم (کارکرده بدون اجرت ساخت)</option>
-                    <option value="new">طلای نو و ساخته شده (دارای اجرت ساخت و مالیات)</option>
+                <select id="goldTypeSelect">
+                    <option value="melted">طلای آب‌شده (بدون اجرت - بهترین سرمایه)</option>
+                    <option value="used">طلای مستعمل / دست‌دوم (بدون اجرت ساخت)</option>
+                    <option value="new">طلای نو و ساخته شده (دارای اجرت و مالیات)</option>
                 </select>
             </div>
-
-            <div class="row" style="background: #030508; padding: 10px; border-radius: 10px; margin-bottom: 10px; border: 1px solid var(--border-color);">
+            <div class="row" style="background: var(--bg-color); padding: 8px; border-radius: 8px; margin-bottom: 8px; border: 1px solid var(--border-color);">
                 <span>قیمت پایه لحظه‌ای هر گرم:</span>
-                <span id="liveGoldBaseLabel" style="color: var(--accent-gold); font-weight: bold;">۲,۴۱۰,۰۰۰ تومان</span>
+                <span style="color: var(--accent-gold); font-weight: bold;">۲,۴۱۰,۰۰۰ تومان</span>
             </div>
-
             <div class="input-group">
                 <label>وزن طلا (گرم):</label>
-                <input type="number" id="calcGoldWeight" placeholder="مثلا 15.5">
+                <input type="number" id="calcGoldWeight" placeholder="مثلا 10">
             </div>
+            <button class="action-btn" onclick="calcGoldFinalPrice()">محاسبه قیمت نهایی</button>
+            <div class="result-box" id="goldResultBox" style="background:var(--bg-color); padding:10px; border-radius:8px; margin-top:8px; font-size:11px; text-align:center; border:1px solid var(--border-color);">قیمت نهایی اینجا نمایش داده می‌شود</div>
 
-            <button class="action-btn" onclick="calcGoldFinalPrice()">محاسبه قیمت نهایی و تحلیل کارشناس</button>
-            <div class="result-box" id="goldResultBox" style="background:#030508; padding:12px; border-radius:10px; margin-top:10px; font-size:11.5px; text-align:center; border:1px solid var(--border-color);">قیمت نهایی اینجا نمایش داده می‌شود</div>
-
-            <button class="action-btn secondary-btn" onclick="toggleInfo('goldInfoBox')" style="margin-top: 14px;">📖 اطلاعات جامع و بروز انواع طلا (آب‌شده، نو، مستعمل)</button>
+            <button class="action-btn secondary-btn" onclick="toggleInfo('goldInfoBox')" style="margin-top:10px;">📖 اطلاعات جامع انواع طلا</button>
             <div id="goldInfoBox" class="info-box">
-                <b>🥇 ۱. طلای آب‌شده:</b> فاقد اجرت ساخت، سود فروشنده و مالیات است. نزدیک‌ترین قیمت به طلای خام را دارد و امن‌ترین انتخاب سرمایه‌گذاری است.<br>
-                * نکته امنیتی: حتماً دارای کد ری‌گیری ۷ رقمی و عیار حک‌شده باشد تا از تقلبی نبودن (سرب/تنگستن) مطمئن شوید.<br><br>
-                <b>🥈 ۲. طلای مستعمل (دست‌دوم):</b> طلایی است که قبلاً استفاده شده و با سود بسیار ناچیز (۱ تا ۲ درصد) فروخته می‌شود. فاقد اجرت ساخت بالا است.<br><br>
-                <b>🥉 ۳. طلای نو و ساخته شده:</b> شامل قیمت طلا + اجرت ساخت + ۷٪ سود طلافروش + ۱۰٪ مالیات بر ارزش افزوده روی اجرت است. برای سرمایه‌گذاری بلندمدت مناسب نیست چون در زمان فروش افت ارزش دارد.
+                <b>طلای آب‌شده:</b> فاقد اجرت و مالیات، امن‌ترین گزینه. حتماً دارای کد ری‌گیری باشد.<br>
+                <b>طلای دست‌دوم:</b> با سود ۱ تا ۲٪ فروخته می‌شود، مناسب پس‌انداز.<br>
+                <b>طلای نو:</b> دارای اجرت و مالیات ۱۷٪، مناسب مصرف زینتی نه سرمایه.
             </div>
         </div>
     </div>
 
-    <!-- ۳. بخش فارکس VIP (باز برای مدیر، قفل برای مشتری) -->
+    <!-- بخش فارکس -->
     <div id="signals" class="section">
-        <div class="card" id="forexMainCard">
-            <!-- محتوا بسته به سطح دسترسی مدیر یا کاربر تغییر میکند -->
-        </div>
+        <div class="card" id="forexMainCard"></div>
         <div class="card">
-            <div class="card-title">📰 اخبار فاندامنتال موثر و سناریوی نمودار انس جهانی</div>
-            <div class="row" style="flex-direction: column; gap: 4px; padding: 8px 0;">
-                <span style="color: var(--accent-gold); font-weight: bold;">گزارش تورم و نرخ بهره Fed</span>
-                <span style="font-size: 11px; color: var(--text-secondary);">تصمیمات بانک مرکزی آمریکا نوسان شدیدی روی جفت‌ارزها و انس طلا (XAU/USD) ایجاد می‌کند. سطوح حمایتی مهم در حال تست هستند و سیگنال‌های پردقت در پنل فعال است.</span>
+            <div class="card-title">📰 فاندامنتال و سناریوی انس طلا</div>
+            <div class="row" style="flex-direction: column; gap: 3px; padding: 6px 0;">
+                <span style="color: var(--accent-gold); font-weight: bold;">نرخ بهره Fed و تورم آمریکا</span>
+                <span style="font-size: 10.5px; color: var(--text-secondary);">نوسانات شدیدی روی انس طلا (XAU/USD) ایجاد می‌کند. سیگنال‌های دقیق در این بخش فعالی است.</span>
             </div>
         </div>
     </div>
 
-    <!-- ۴. بخش خرید اشتراک و راهنمای واریز -->
+    <!-- بخش اشتراک -->
     <div id="vip" class="section">
         <div class="card">
-            <div class="card-title">⭐ خرید اشتراک ویژه VIP (مبلغ: ۲۹۹,۰۰۰ تومان)</div>
-            <p style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
-                با پرداخت مبلغ <b>۲۹۹,۰۰۰ تومان</b> برای اشتراک ۱ ماهه، به سیگنال‌های فوق‌العاده پردقت طلا و فارکس دسترسی کامل پیدا کنید.
+            <div class="card-title">⭐ خرید اشتراک VIP (مبلغ: ۲۹۹,۰۰۰ تومان)</div>
+            <p style="font-size: 10.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+                با پرداخت ۲۹۹ هزار تومان (اشتراک ۱ ماهه)، به سیگنال‌های پردقت طلا و فارکس دسترسی پیدا کنید.
             </p>
-            <div style="background: linear-gradient(135deg, #121926, #070a12); border: 1px solid var(--accent-gold); border-radius: 14px; padding: 14px; text-align: center;">
-                <div style="font-size: 11px; color: var(--text-secondary);">شماره کارت جهت واریز به نام مدیریت مجموعه:</div>
-                <div style="font-family: monospace; font-size: 14px; color: var(--accent-gold); background: #030508; padding: 10px; border-radius: 8px; margin: 8px 0; letter-spacing: 1px; border: 1px dashed var(--accent-gold);">6037 - 9975 - XXXX - XXXX</div>
-                <button class="action-btn secondary-btn" style="padding: 10px; font-size: 11px;" onclick="alert('شماره کارت کپی شد!');">📋 کپی شماره کارت</button>
+            <div style="background: var(--bg-color); border: 1px solid var(--accent-gold); border-radius: 12px; padding: 12px; text-align: center;">
+                <div style="font-size: 10px; color: var(--text-secondary);">شماره کارت به نام مدیریت مجموعه:</div>
+                <div style="font-family: monospace; font-size: 13px; color: var(--accent-gold); background: var(--card-bg); padding: 8px; border-radius: 6px; margin: 6px 0; letter-spacing: 1px; border: 1px dashed var(--accent-gold);">6037 - 9975 - XXXX - XXXX</div>
+                <button class="action-btn secondary-btn" style="padding: 8px; font-size: 10px;" onclick="alert('شماره کارت کپی شد!');">📋 کپی شماره کارت</button>
 
-                <div class="input-group" style="margin-top: 14px; text-align: right;">
-                    <label>نام و نام خانوادگی شما:</label>
-                    <input type="text" id="buyerName" placeholder="مثلا محمد رضایی">
+                <div class="input-group" style="margin-top: 10px; text-align: right;">
+                    <label>نام و نام خانوادگی:</label>
+                    <input type="text" id="buyerName" placeholder="محمد رضایی">
                 </div>
                 <div class="input-group" style="text-align: right;">
-                    <label>شماره تماس شما:</label>
-                    <input type="text" id="buyerPhone" placeholder="مثلا 09123456789" dir="ltr">
+                    <label>شماره تماس:</label>
+                    <input type="text" id="buyerPhone" placeholder="09123456789" dir="ltr">
                 </div>
 
-                <p style="font-size: 11px; color: var(--text-secondary); margin-top: 10px; line-height: 1.5;">
-                    پس از واریز مبلغ ۲۹۹,۰۰۰ تومان، فیش واریزی را به همراه مشخصات از طریق یکی از پیام‌رسان‌های زیر برای مدیر ارسال نمایید:
-                </p>
-                <div style="font-size: 13px; color: var(--accent-gold); font-weight: bold; margin: 6px 0;" dir="ltr">09173742113</div>
+                <p style="font-size: 10px; color: var(--text-secondary); margin-top: 8px;">پس از واریز، فیش را به مدیر بفرستید:</p>
+                <div style="font-size: 12px; color: var(--accent-gold); font-weight: bold; margin: 4px 0;" dir="ltr">09173742113</div>
 
                 <div class="social-grid">
-                    <a href="https://rubika.ir" target="_blank" class="social-link">🟣 ارسال در روبیکا</a>
-                    <a href="https://ble.ir" target="_blank" class="social-link">🔵 ارسال در بله</a>
-                    <a href="https://t.me/YourTelegramID" target="_blank" class="social-link">✈️ ارسال در تلگرام</a>
-                    <a href="https://wa.me/989173742113" target="_blank" class="social-link">🟢 ارسال در واتساپ</a>
+                    <a href="https://rubika.ir" target="_blank" class="social-link">🟣 روبیکا</a>
+                    <a href="https://ble.ir" target="_blank" class="social-link">🔵 بله</a>
+                    <a href="https://t.me/YourTelegramID" target="_blank" class="social-link">✈️ تلگرام</a>
+                    <a href="https://wa.me/989173742113" target="_blank" class="social-link">🟢 واتساپ</a>
                 </div>
 
-                <div class="input-group" style="margin-top: 16px; text-align: right;">
+                <div class="input-group" style="margin-top: 12px; text-align: right;">
                     <label>کد فعال‌سازی دریافتی از مدیر:</label>
-                    <input type="text" id="userVipCode" placeholder="مثلا VIP-8842">
+                    <input type="text" id="userVipCode" placeholder="VIP-XXXX">
                 </div>
-                <button class="action-btn" onclick="activateUserVip()">اعمال کد اشتراک در این گوشی</button>
+                <button class="action-btn" onclick="activateUserVip()">اعمال کد اشتراک</button>
             </div>
         </div>
     </div>
 
-    <!-- ۵. پنل مدیریت اختصاصی -->
+    <!-- بخش مدیریت -->
     <div id="admin" class="section">
         <div class="card" style="border: 1px solid var(--accent-gold);">
-            <div class="card-title">⚙️ پنل مدیریت اختصاصی (دسترسی مدیر)</div>
-            <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
-                به عنوان مدیر، بخش فارکس برای شما باز است و از این قسمت می‌توانید مشتریان جدید را ثبت کرده و اشتراکشان را با یک کلیک فعال کنید.
-            </p>
-
-            <div class="row"><span>تعداد کل مشتریان ثبت‌شده:</span> <span id="adminTotalUsers" style="color:var(--accent-gold); font-weight:bold;">0</span></div>
-            <div class="row" style="margin-bottom: 12px;"><span>مدیر مجموعه:</span> <span style="font-family:monospace;" dir="ltr">09173742113</span></div>
+            <div class="card-title">⚙️ پنل مدیریت اختصاصی</div>
+            <p style="font-size: 10.5px; color: var(--text-secondary); margin-bottom: 10px;">ثبت مشتری و فعال‌سازی فوری اشتراک با یک کلیک:</p>
+            <div class="row"><span>تعداد کل مشتریان:</span> <span id="adminTotalUsers" style="color:var(--accent-gold); font-weight:bold;">0</span></div>
+            <div class="row" style="margin-bottom: 10px;"><span>مدیر:</span> <span dir="ltr">09173742113</span></div>
 
             <div class="input-group">
                 <label>شماره تماس مشتری:</label>
@@ -415,22 +406,46 @@
                 <label>نام مشتری:</label>
                 <input type="text" id="newClientName" placeholder="نام مشتری">
             </div>
-            <button class="action-btn" onclick="adminRegisterClient()">➕ ثبت مشتری و تولید لینک اشتراک</button>
+            <button class="action-btn" onclick="adminRegisterClient()">➕ ثبت مشتری و تولید کد</button>
 
-            <div id="clientListArea" style="margin-top: 16px; border-top: 1px solid var(--border-color); padding-top: 12px;">
-                <div style="font-size: 11.5px; color: var(--accent-gold); margin-bottom: 8px; font-weight: bold;">مدیریت اشتراک مشتریان:</div>
-                <div id="renderedClients" style="font-size: 11px; color: var(--text-secondary);">هنوز مشتری ثبت نشده است.</div>
+            <div id="clientListArea" style="margin-top: 12px; border-top: 1px solid var(--border-color); padding-top: 10px;">
+                <div style="font-size: 10.5px; color: var(--accent-gold); margin-bottom: 6px; font-weight: bold;">لیست و وضعیت مشتریان:</div>
+                <div id="renderedClients" style="font-size: 10px; color: var(--text-secondary);">هنوز مشتری ثبت نشده است.</div>
             </div>
         </div>
     </div>
 
-    <div class="footer">
-        Gold & Forex Pro Super App • Secure Protected Version
-    </div>
+    <div class="footer">Gold & Forex Pro • Sound & Blink Enabled</div>
 
     <script>
-        // قیمت پایه ثابت اتوماتیک طلا
         const currentGoldBase = 2410000;
+
+        function changeTheme(themeName) {
+            if(themeName === 'luxury') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', themeName);
+            }
+            localStorage.setItem('app_theme', themeName);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('app_theme') || 'luxury';
+            document.getElementById('themeSelector').value = savedTheme;
+            if(savedTheme !== 'luxury') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+            renderForexSection();
+            renderAdminClients();
+            
+            // چشمک زدن لامپ هشدار در هدر آلارم
+            setInterval(() => {
+                const bulb = document.getElementById('blinkingBulb');
+                if(bulb) {
+                    bulb.style.opacity = bulb.style.opacity === '0.2' ? '1' : '0.2';
+                }
+            }, 500);
+        });
 
         function switchTab(evt, sectionId) {
             document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
@@ -446,67 +461,37 @@
             el.style.display = (el.style.display === 'block') ? 'none' : 'block';
         }
 
-        function updateGoldBaseDisplay() {
-            // اتوماتیک و هماهنگ
-        }
-
-        // محاسبه حباب سکه
         function calculateCoinBubble() {
-            const type = document.getElementById('calcCoinType').value;
             const market = parseFloat(document.getElementById('marketCoinPrice').value);
-            if(!market) {
-                document.getElementById('coinBubbleResult').innerHTML = "لطفاً قیمت بازار را وارد کنید.";
-                return;
-            }
+            if(!market) return;
             const intrinsic = currentGoldBase * 7.322 + 200000;
             const bubble = market - intrinsic;
             const percent = ((bubble / intrinsic) * 100).toFixed(2);
             document.getElementById('coinBubbleResult').innerHTML = `
-                ارزش ذاتی سکه: <b>${Math.round(intrinsic).toLocaleString()} تومان</b><br>
-                حباب محاسبه‌شده: <span style="color:${bubble >= 0 ? '#ef4444' : '#10b981'}">${Math.round(bubble).toLocaleString()} تومان (${percent}%)</span>
+                ارزش ذاتی: <b>${Math.round(intrinsic).toLocaleString()} ت</b><br>
+                حباب: <span style="color:${bubble >= 0 ? '#ef4444' : '#10b981'}">${Math.round(bubble).toLocaleString()} ت (${percent}%)</span>
             `;
         }
 
-        // محاسبه پیشرفته طلا
         function calcGoldFinalPrice() {
             const type = document.getElementById('goldTypeSelect').value;
             const weight = parseFloat(document.getElementById('calcGoldWeight').value) || 0;
             if(!weight) {
-                document.getElementById('goldResultBox').innerHTML = "لطفاً وزن طلا را وارد کنید.";
+                document.getElementById('goldResultBox').innerHTML = "وزن را وارد کنید.";
                 return;
             }
-            let total = 0;
-            let note = "";
-            if(type === 'melted') {
-                total = weight * currentGoldBase;
-                note = "💎 طلای آب‌شده: بدون اجرت و مالیات، مناسب‌ترین گزینه سرمایه‌گذاری امن.";
-            } else if(type === 'used') {
-                total = weight * currentGoldBase * 1.02; // 2 درصد سود کارکرده
-                note = "✅ طلای مستعمل: بدون اجرت ساخت، عالی برای پس‌انداز.";
-            } else {
-                total = (weight * currentGoldBase) + (weight * 180000) * 1.17; // اجرت و مالیات
-                note = "⚠️ طلای نو: دارای اجرت و مالیات (مناسب مصرف زینتی، نه سرمایه‌گذاری).";
-            }
-            document.getElementById('goldResultBox').innerHTML = `
-                قیمت نهایی قابل معامله: <span style="color:var(--accent-gold); font-size:13px;"><b>${Math.round(total).toLocaleString()} تومان</b></span><br>
-                <span style="color:var(--text-secondary); font-size:10.5px; line-height:1.5; display:inline-block; margin-top:4px;">${note}</span>
-            `;
+            let total = (type === 'melted') ? weight * currentGoldBase : (type === 'used') ? weight * currentGoldBase * 1.02 : (weight * currentGoldBase) + (weight * 180000) * 1.17;
+            document.getElementById('goldResultBox').innerHTML = `قیمت نهایی: <span style="color:var(--accent-gold); font-size:12px;"><b>${Math.round(total).toLocaleString()} تومان</b></span>`;
         }
 
-        // بخش فارکس برای مدیر باز، برای مشتری قفل
         function renderForexSection() {
-            const isVip = localStorage.getItem('user_has_vip') === 'true';
-            // فرض بر این است که مدیر همیشه به تب مدیریت دسترسی دارد یا میتواند ببیند
-            const container = document.getElementById('forexMainCard');
-            
-            // بخش فارکس برای شما به عنوان مدیر همیشه باز است
-            container.innerHTML = `
-                <div class="card-title"><span>MT5 Gold Signal (پنل تخصصی مدیر و اعضای VIP)</span> <span class="value-green">● فعال</span></div>
-                <div class="row"><span>نماد معاملاتی:</span> <span>XAU/USD (Gold)</span></div>
-                <div class="row"><span>نقطه ورود (Entry Zone):</span> <span>2,650.0 - 2,653.0</span></div>
-                <div class="row"><span>حد ضرر (Stop Loss):</span> <span class="value-red">2,642.0</span></div>
-                <div class="row"><span>هدف اول (Take Profit 1):</span> <span class="value-green">2,685.0</span></div>
-                <button class="action-btn" onclick="alert('پارامترهای سیگنال با موفقیت کپی شد!');">📋 کپی پارامترهای معاملاتی</button>
+            document.getElementById('forexMainCard').innerHTML = `
+                <div class="card-title"><span>MT5 Gold Signal (پنل مدیر)</span> <span class="value-green">● فعال</span></div>
+                <div class="row"><span>نماد:</span> <span>XAU/USD (Gold)</span></div>
+                <div class="row"><span>نقطه ورود:</span> <span>2,650.0 - 2,653.0</span></div>
+                <div class="row"><span>حد ضرر (SL):</span> <span class="value-red">2,642.0</span></div>
+                <div class="row"><span>هدف (TP):</span> <span class="value-green">2,685.0</span></div>
+                <button class="action-btn" onclick="alert('کپی شد!');">📋 کپی پارامترها</button>
             `;
         }
 
@@ -514,46 +499,39 @@
             const code = document.getElementById('userVipCode').value.trim();
             if(code.startsWith('VIP')) {
                 localStorage.setItem('user_has_vip', 'true');
-                alert('🎉 اشتراک ویژه VIP شما با موفقیت فعال شد!');
+                alert('🎉 اشتراک شما فعال شد!');
                 renderForexSection();
             } else {
-                alert('❌ کد فعال‌سازی نادرست است. لطفاً از طریق شماره 09173742113 با مدیر هماهنگ کنید.');
+                alert('❌ کد نامعتبر است. هماهنگ کنید: 09173742113');
             }
         }
 
-        // پنل مدیریت مشتریان
         function adminRegisterClient() {
             const phone = document.getElementById('newClientPhone').value.trim();
             const name = document.getElementById('newClientName').value.trim();
-            if(!phone) {
-                alert('لطفاً شماره تماس مشتری را وارد کنید.');
-                return;
-            }
+            if(!phone) return alert('شماره تماس را وارد کنید');
             let clients = JSON.parse(localStorage.getItem('app_clients') || '[]');
             clients.push({ phone, name, vip: false, code: 'VIP-' + Math.floor(1000 + Math.random() * 9000) });
             localStorage.setItem('app_clients', JSON.stringify(clients));
             document.getElementById('newClientPhone').value = '';
             document.getElementById('newClientName').value = '';
             renderAdminClients();
-            alert('✅ مشتری ثبت شد و لینک و کد اشتراک آماده گردید.');
+            alert('✅ مشتری ثبت شد.');
         }
 
         function renderAdminClients() {
             let clients = JSON.parse(localStorage.getItem('app_clients') || '[]');
             document.getElementById('adminTotalUsers').innerText = clients.length;
             const area = document.getElementById('renderedClients');
-            if(clients.length === 0) {
-                area.innerHTML = "هنوز مشتری ثبت نشده است.";
-                return;
-            }
+            if(clients.length === 0) { area.innerHTML = "هنوز مشتری ثبت نشده است."; return; }
             let html = "";
             clients.forEach((c, index) => {
                 html += `
-                    <div style="background:#030508; padding:10px; border-radius:10px; margin-bottom:8px; border:1px solid var(--border-color);">
+                    <div style="background:var(--bg-color); padding:8px; border-radius:8px; margin-bottom:5px; border:1px solid var(--border-color);">
                         <div>👤 <b>${c.name || 'بدون نام'}</b> - <span dir="ltr">${c.phone}</span></div>
-                        <div style="font-size:10.5px; color:var(--accent-gold); margin:4px 0;">کد اختصاصی: <b>${c.code}</b> | وضعیت: ${c.vip ? '<span style="color:var(--green)">اشتراک فعال ✅</span>' : '<span style="color:var(--red)">غیرفعال ❌</span>'}</div>
-                        <button class="action-btn" style="padding:8px; font-size:10.5px; margin-top:6px;" onclick="toggleClientVip(${index})">
-                            ${c.vip ? 'غیرفعال‌سازی اشتراک' : '✨ فعال‌سازی فوری اشتراک (تایید فیش)'}
+                        <div style="font-size:10px; color:var(--accent-gold); margin:2px 0;">کد: <b>${c.code}</b> | ${c.vip ? '<span style="color:var(--green)">فعال ✅</span>' : '<span style="color:var(--red)">غیرفعال ❌</span>'}</div>
+                        <button class="action-btn" style="padding:6px; font-size:10px; margin-top:4px;" onclick="toggleClientVip(${index})">
+                            ${c.vip ? 'غیرفعال‌سازی' : '✨ فعال‌سازی فوری اشتراک'}
                         </button>
                     </div>
                 `;
@@ -567,9 +545,6 @@
             localStorage.setItem('app_clients', JSON.stringify(clients));
             renderAdminClients();
         }
-
-        // راه‌اندازی اولیه
-        renderForexSection();
     </script>
 </body>
 </html>
