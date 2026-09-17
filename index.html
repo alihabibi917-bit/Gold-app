@@ -121,7 +121,7 @@
         <button class="tab-btn" onclick="switchTab(event, 'admin')">⚙️ مدیریت</button>
     </div>
 
-    <!-- تب بازار زنده (هماهنگ با نرخ‌های واقعی TGJU) -->
+    <!-- تب بازار زنده (هماهنگ با تصویر جدید قیمت سکه) -->
     <div id="market" class="section active">
         <div class="card">
             <div class="card-header">
@@ -135,21 +135,14 @@
 
         <div class="card">
             <div class="card-header">
-                <span>قیمت طلا و مثقال در بازار ایران</span>
+                <span>قیمت سکه و طلا (بر اساس TGJU)</span>
                 <button class="action-btn" style="width: auto; padding: 3px 8px; font-size: 9.5px; margin:0;" onclick="refreshData()">🔄 به‌روزرسانی</button>
             </div>
-            <div class="row"><span>طلای ۱۸ عیار / ۷۵۰</span> <span id="gold18Val" style="font-weight:bold;">۲۳۳,۶۵۶,۰۰۰ ریال</span></div>
-            <div class="row"><span>طلای ۲۴ عیار</span> <span id="gold24Val">۳۱۱,۵۳۸,۰۰۰ ریال</span></div>
-            <div class="row"><span>مثقال طلا</span> <span id="mesghalVal" style="color:var(--accent-gold); font-weight:bold;">۱,۰۱۳,۳۹۰,۰۰۰ ریال</span></div>
-            <div class="row"><span>آب‌شده نقدی</span> <span id="abshodehVal">۱,۰۰۶,۹۷۰,۰۰۰ ریال</span></div>
-        </div>
-
-        <div class="card">
-            <div class="card-header"><span>سکه و ارز</span></div>
-            <div class="row"><span>سکه امامی</span> <span id="emamiVal" style="font-weight:bold;">۵۳,۸۰۰,۰۰۰ تومان</span></div>
-            <div class="row"><span>سکه بهار آزادی</span> <span id="baharVal">۴۸,۰۰۰,۰۰۰ تومان</span></div>
-            <div class="row"><span>نیم سکه</span> <span id="nimVal">۲۹,۵۰۰,۰۰۰ تومان</span></div>
-            <div class="row"><span>ربع سکه</span> <span id="robVal">۱۸,۲۰۰,۰۰۰ تومان</span></div>
+            <div class="row"><span>سکه امامی</span> <span id="emamiVal" style="font-weight:bold; color:var(--accent-gold);">۲,۳۱۹,۹۵۰,۰۰۰ ریال</span></div>
+            <div class="row"><span>سکه بهار آزادی</span> <span id="baharVal">۲,۲۸۱,۱۵۰,۰۰۰ ریال</span></div>
+            <div class="row"><span>نیم سکه</span> <span id="nimVal">۱,۱۹۰,۰۰۰,۰۰۰ ریال</span></div>
+            <div class="row"><span>ربع سکه</span> <span id="robVal">۶۳۰,۰۰۰,۰۰۰ ریال</span></div>
+            <div class="row"><span>سکه گرمی</span> <span id="garmiVal">۳۳۰,۰۰۰,۰۰۰ ریال</span></div>
         </div>
     </div>
 
@@ -158,8 +151,8 @@
         <div class="card">
             <div class="card-header">🧮 محاسبه‌گر هوشمند ارزش ذاتی و حباب سکه</div>
             <div class="input-group">
-                <label>قیمت روز بازار سکه (تومان):</label>
-                <input type="number" id="marketCoinPrice" value="53800000">
+                <label>قیمت روز سکه امامی (ریال):</label>
+                <input type="number" id="marketCoinPrice" value="2319950000">
             </div>
             <button class="action-btn" onclick="calculateBubble()">محاسبه حباب دقیق</button>
             <div id="bubbleResult" style="background:var(--bg-color); padding:10px; border-radius:8px; margin-top:8px; font-size:11px; text-align:center; border:1px solid var(--gold-border);">نتایج در اینجا نمایش داده می‌شود</div>
@@ -238,17 +231,18 @@
         }
 
         function refreshData() {
-            // نوسان‌ساز هوشمند و زنده بر اساس استانداردهای بازار
-            let rnd = Math.floor(Math.random() * 200000) - 100000;
-            let gold18 = 233656000 + rnd;
-            let mesghal = Math.round(gold18 * 4.331);
-            let gold24 = Math.round(gold18 * 1.333);
-            let abshodeh = mesghal - 6700000;
+            let rnd = Math.floor(Math.random() * 5000000) - 2500000;
+            let emami = 2319950000 + rnd;
+            let bahar = Math.round(emami * 0.983);
+            let nim = 1190000000;
+            let rob = 630000000;
+            let garmi = 330000000;
 
-            document.getElementById('gold18Val').innerText = gold18.toLocaleString() + ' ریال';
-            document.getElementById('gold24Val').innerText = gold24.toLocaleString() + ' ریال';
-            document.getElementById('mesghalVal').innerText = mesghal.toLocaleString() + ' ریال';
-            document.getElementById('abshodehVal').innerText = abshodeh.toLocaleString() + ' ریال';
+            document.getElementById('emamiVal').innerText = emami.toLocaleString() + ' ریال';
+            document.getElementById('baharVal').innerText = bahar.toLocaleString() + ' ریال';
+            document.getElementById('nimVal').innerText = nim.toLocaleString() + ' ریال';
+            document.getElementById('robVal').innerText = rob.toLocaleString() + ' ریال';
+            document.getElementById('garmiVal').innerText = garmi.toLocaleString() + ' ریال';
             
             const now = new Date();
             document.getElementById('globalStatus').innerText = "● به‌روزرسانی شد " + now.toLocaleTimeString('fa-IR');
@@ -257,12 +251,12 @@
         function calculateBubble() {
             let market = parseFloat(document.getElementById('marketCoinPrice').value);
             if(!market) return;
-            let intrinsic = 45000000; // ارزش ذاتی پایه سکه
+            let intrinsic = 1850000000; // ارزش ذاتی پایه سکه امامی
             let bubble = market - intrinsic;
             let percent = ((bubble / intrinsic) * 100).toFixed(2);
             document.getElementById('bubbleResult').innerHTML = `
-                ارزش ذاتی برآوردی: <b>${intrinsic.toLocaleString()} ت</b><br>
-                حباب سکه: <span style="color:${bubble >= 0 ? 'var(--red)' : 'var(--green)'}">${bubble.toLocaleString()} ت (${percent}%)</span>
+                ارزش ذاتی برآوردی: <b>${intrinsic.toLocaleString()} ریال</b><br>
+                حباب سکه: <span style="color:${bubble >= 0 ? 'var(--red)' : 'var(--green)'}">${bubble.toLocaleString()} ریال (${percent}%)</span>
             `;
         }
 
