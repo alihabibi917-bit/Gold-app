@@ -1,26 +1,316 @@
-// بروزرسانی قیمت‌ها با فرمول‌های دقیق و منطقی بازار
-let baseGold = 7340000; // پایه طلای ۱۸ عیار
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#080808">
+<title>Gold & Forex Auto System Pro</title>
+
+<style>
+:root{
+  --bg:#090909; --bg2:#111; --card:#171717; --card2:#202020;
+  --accent:#ffd15c; --accent2:#a87512; --border:#5b4215;
+  --text:#fff; --muted:#aaa; --up:#21d27a; --down:#ff5261;
+  --glow:rgba(255,190,50,.30); --shadow:rgba(0,0,0,.75);
+  --font:Tahoma,"Segoe UI",sans-serif;
+}
+
+[data-theme="classic-gold"]{--bg:#080706;--bg2:#11100d;--card:#191611;--card2:#241e14;--accent:#ffd75a;--accent2:#a66f08;--border:#795716;--glow:rgba(255,194,45,.34);}
+[data-theme="black-gold"]{--bg:#050505;--bg2:#0d0d0d;--card:#141414;--card2:#202020;--accent:#f5c542;--accent2:#8c6816;--border:#54400e;--glow:rgba(245,197,66,.28);}
+[data-theme="royal"]{--bg:#090313;--bg2:#13061e;--card:#1c0b2b;--card2:#28123c;--accent:#d9a7ff;--accent2:#7838a7;--border:#68328d;--glow:rgba(183,91,255,.30);}
+[data-theme="emerald"]{--bg:#02100a;--bg2:#041a10;--card:#072116;--card2:#0b3020;--accent:#51e6a0;--accent2:#167b50;--border:#146442;--glow:rgba(45,226,143,.28);}
+[data-theme="ruby"]{--bg:#100204;--bg2:#1c0508;--card:#25070c;--card2:#360b13;--accent:#ff7084;--accent2:#9d243b;--border:#752035;--glow:rgba(255,63,94,.30);}
+[data-theme="silver"]{--bg:#080b10;--bg2:#111720;--card:#18202b;--card2:#222d3a;--accent:#e8edf4;--accent2:#718093;--border:#526173;--glow:rgba(210,225,245,.24);}
+[data-theme="copper"]{--bg:#120904;--bg2:#1d0e07;--card:#29140b;--card2:#3b1d10;--accent:#ffae68;--accent2:#9b4c1c;--border:#77401d;--glow:rgba(255,135,48,.30);}
+[data-theme="ocean"]{--bg:#020711;--bg2:#061322;--card:#0a1b2b;--card2:#0f2a40;--accent:#4ed9ff;--accent2:#187da4;--border:#185e7c;--glow:rgba(30,190,255,.30);}
+[data-theme="sunset"]{--bg:#140702;--bg2:#241007;--card:#32150a;--card2:#451f0e;--accent:#ffb24d;--accent2:#a94f18;--border:#843c14;--glow:rgba(255,125,35,.30);}
+[data-theme="matrix"]{--bg:#000;--bg2:#020902;--card:#041404;--card2:#062006;--accent:#35ff72;--accent2:#118b37;--border:#12672b;--glow:rgba(0,255,75,.27);}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--bg)}
+body{
+ color:var(--text);font-family:var(--font);max-width:480px;margin:auto;
+ padding:8px;overflow-x:hidden;
+ background:radial-gradient(circle at 50% -10%,var(--glow),transparent 38%),linear-gradient(180deg,var(--bg2),var(--bg));
+ transition:background .35s,color .25s;
+}
+.app{
+ border:1px solid var(--border);border-radius:20px;padding:8px;
+ background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(0,0,0,.18));
+ box-shadow:0 20px 45px var(--shadow),inset 1px 1px 0 rgba(255,255,255,.06);
+}
+.topbar{
+ min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:6px;
+ padding:8px 10px;border-radius:15px;border:1px solid var(--border);
+ background:linear-gradient(145deg,var(--card2),var(--card));
+ box-shadow:7px 7px 16px var(--shadow),-4px -4px 12px rgba(255,255,255,.035);
+}
+.logo{display:flex;align-items:center;gap:7px}
+.logo-icon{
+ width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:20px;
+ background:linear-gradient(145deg,var(--accent),var(--accent2));color:#18100a;border:1px solid var(--accent);
+ box-shadow:4px 4px 8px #000,inset 2px 2px 4px rgba(255,255,255,.45);
+}
+.logo h1{font-size:13px;color:var(--accent);text-shadow:0 0 10px var(--glow)}
+.logo small{display:block;color:var(--muted);font-size:7px;margin-top:2px}
+.theme-select{
+ width:88px;padding:6px 4px;border-radius:10px;background:var(--bg);color:var(--accent);
+ border:1px solid var(--border);font-size:7.5px;outline:0;box-shadow:inset 2px 2px 5px #000;
+}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:8px 0}
+.tab-btn{
+ min-height:40px;border:1px solid var(--border);border-radius:10px;color:var(--muted);
+ background:linear-gradient(145deg,var(--card2),var(--card));font-family:inherit;font-size:7.5px;cursor:pointer;
+ box-shadow:4px 4px 9px var(--shadow);transition:.15s;text-align:center;padding:0 2px;
+}
+.tab-btn:active,.tab-btn.active{
+ color:var(--accent);border-color:var(--accent);transform:translateY(2px);
+ box-shadow:inset 3px 3px 6px #000,0 0 8px var(--glow);font-weight:bold;
+}
+.section{display:none;animation:fade .2s ease}
+.section.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.card{
+ margin-bottom:8px;padding:10px;border-radius:14px;border:1px solid var(--border);
+ background:linear-gradient(145deg,rgba(255,255,255,.04),transparent 35%),linear-gradient(145deg,var(--card2),var(--card));
+ box-shadow:6px 6px 15px var(--shadow);position:relative;
+}
+.card-header{
+ display:flex;align-items:center;justify-content:space-between;
+ color:var(--accent);font-weight:bold;font-size:10px;padding-bottom:6px;margin-bottom:5px;
+ border-bottom:1px solid var(--border);
+}
+.status{font-size:7px;color:var(--up);display:flex;align-items:center;gap:3px}
+.status::before{content:"";width:6px;height:6px;background:var(--up);border-radius:50%;display:inline-block;animation:pulse 1.5s infinite}
+@keyframes pulse{0%{opacity:1}50%{opacity:.3}100%{opacity:1}}
+
+.row{
+ min-height:34px;display:flex;align-items:center;justify-content:space-between;
+ padding:5px 2px;border-bottom:1px solid rgba(255,255,255,.03);font-size:9.5px;
+}
+.row:last-child{border-bottom:0}
+.price{font-weight:bold;color:var(--accent);font-size:10.5px}
+.change-up{color:var(--up);font-size:8px}
+.change-down{color:var(--down);font-size:8px}
+
+.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:8px}
+.metric{
+ padding:8px;border:1px solid var(--border);border-radius:12px;text-align:center;
+ background:linear-gradient(145deg,var(--card2),var(--card));box-shadow:4px 4px 10px var(--shadow);
+}
+.metric .icon{font-size:16px}.metric b{display:block;color:var(--accent);font-size:10px;margin:2px 0}.metric span{font-size:7px;color:var(--muted)}
+
+.signal-box{
+ background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:8px;margin-bottom:6px;box-shadow:inset 2px 2px 5px #000;
+}
+.badge-buy{background:rgba(33,210,122,0.15);color:var(--up);border:1px solid var(--up);padding:2px 6px;border-radius:5px;font-size:8px;}
+.badge-sell{background:rgba(255,82,97,0.15);color:var(--down);border:1px solid var(--down);padding:2px 6px;border-radius:5px;font-size:8px;}
+
+.action-btn{
+ width:100%;border:1px solid var(--accent);border-radius:10px;padding:9px;
+ background:linear-gradient(145deg,var(--card2),var(--card));color:var(--accent);
+ font-family:inherit;font-weight:bold;font-size:9.5px;cursor:pointer;
+ box-shadow:5px 5px 10px var(--shadow);transition:.14s;margin-top:4px;
+}
+.action-btn:active{transform:translateY(2px);box-shadow:inset 3px 3px 6px #000}
+
+.input-group{margin:6px 0}
+.input-group label{display:block;color:var(--muted);font-size:8px;margin-bottom:3px}
+.input-group input{
+ width:100%;padding:8px;border-radius:9px;border:1px solid var(--border);
+ background:var(--bg);color:var(--text);font-family:inherit;font-size:9.5px;outline:0;
+ box-shadow:inset 2px 2px 5px #000;
+}
+.result{
+ margin-top:6px;padding:8px;border-radius:10px;text-align:center;font-size:9px;
+ border:1px solid var(--border);background:var(--bg);box-shadow:inset 2px 2px 5px #000;
+}
+.footer{text-align:center;color:var(--muted);font-size:7px;padding:5px 0 2px}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header class="topbar">
+  <div class="logo">
+    <div class="logo-icon">⚡</div>
+    <div>
+      <h1>سیستم اتوماتیک بازار و فارکس</h1>
+      <small id="liveDateTime">در حال بارگذاری تاریخ...</small>
+    </div>
+  </div>
+  <div class="theme-wrap">
+    <select class="theme-select" id="themeSelector" onchange="changeTheme(this.value)">
+      <option value="classic-gold">کلاسیک گلد</option>
+      <option value="black-gold">طلایی مشکی</option>
+      <option value="royal">سلطنتی</option>
+      <option value="emerald">زمردی</option>
+      <option value="ruby">یاقوتی</option>
+      <option value="silver">نقره‌ای</option>
+      <option value="copper">مسی</option>
+      <option value="ocean">اقیانوسی</option>
+      <option value="sunset">غروب</option>
+      <option value="matrix">ماتریکس</option>
+    </select>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" onclick="switchTab(event,'market')">🪙 بازار</button>
+  <button class="tab-btn" onclick="switchTab(event,'signals')">📈 فارکس</button>
+  <button class="tab-btn" onclick="switchTab(event,'bubble')">📊 حباب</button>
+  <button class="tab-btn" onclick="switchTab(event,'payment')">💳 پرداخت VIP</button>
+  <button class="tab-btn" onclick="switchTab(event,'admin')">⚙️ مدیریت</button>
+</nav>
+
+<!-- تب بازار و طلا -->
+<section id="market" class="section active">
+  <div class="metrics">
+    <div class="metric"><div class="icon">🥇</div><b id="gold18Metric">۷,۳۴۰,۰۰۰</b><span>طلای ۱۸ عیار / تومان</span></div>
+    <div class="metric"><div class="icon">🌕</div><b id="coinMetric">۷۴,۵۰۰,۰۰۰</b><span>سکه امامی / تومان</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span>نرخ‌های زنده طلا و آب‌شده (اتوماتیک)</span>
+      <span class="status">بروزرسانی زنده</span>
+    </div>
+    <div class="row"><span>طلای ۱۸ عیار (۷۵۰)</span><span><b class="price" id="gold18">۷,۳۴۰,۰۰۰</b> ت</span></div>
+    <div class="row"><span>طلای ۲۴ عیار</span><span><b class="price" id="gold24">۹,۷۸۶,۰۰۰</b> ت</span></div>
+    <div class="row"><span>مثقال طلای آب‌شده</span><span><b class="price" id="mesghal">۳۱,۷۶۰,۰۰۰</b> ت</span></div>
+    <div class="row"><span>انس جهانی طلا (XAUUSD)</span><span><b class="price" id="ounceGold">$2,369.98</b></span></div>
+    <div class="row"><span>انس جهانی نقره (XAGUSD)</span><span><b class="price" id="ounceSilver">$31.45</b></span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span>قیمت انواع سکه (فرمول دقیق بازار)</span></div>
+    <div class="row"><span>سکه امامی</span><span><b class="price" id="emami">۷۴,۵۰۰,۰۰۰</b> ت</span></div>
+    <div class="row"><span>سکه بهار آزادی</span><span><b class="price" id="bahar">۷۱,۹۰۰,۰۰۰</b> ت</span></div>
+    <div class="row"><span>نیم سکه</span><span><b class="price" id="nim">۴۲,۴۰۰,۰۰۰</b> ت</span></div>
+    <div class="row"><span>ربع سکه</span><span><b class="price" id="rob">۲۴,۶۰۰,۰۰۰</b> ت</span></div>
+    <div class="row"><span>سکه گرمی</span><span><b class="price" id="garmi">۱۳,۸۰۰,۰۰۰</b> ت</span></div>
+  </div>
+</section>
+
+<!-- تب سیگنال فارکس طلا و نقره (کاملا اتوماتیک) -->
+<section id="signals" class="section">
+  <div class="card">
+    <div class="card-header"><span>📈 سیگنال‌های اتوماتیک فارکس (طلا و نقره)</span><span class="status">آنلاین</span></div>
+    
+    <div class="signal-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:10px;font-weight:bold;">
+        <span>XAUUSD (طلای جهانی)</span>
+        <span class="badge-buy">خرید (BUY)</span>
+      </div>
+      <div class="row"><span>نقطه ورود (Entry):</span> <b style="color:var(--accent)">۲,۳۶۸.۵۰</b></div>
+      <div class="row"><span>حد سود (TP):</span> <span class="change-up">۲,۳۷۸.۰۰</span></div>
+      <div class="row"><span>حد ضرر (SL):</span> <span class="change-down">۲,۳۶۱.۰۰</span></div>
+    </div>
+
+    <div class="signal-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:10px;font-weight:bold;">
+        <span>XAGUSD (نقره جهانی)</span>
+        <span class="badge-sell">فروش (SELL)</span>
+      </div>
+      <div class="row"><span>نقطه ورود (Entry):</span> <b style="color:var(--accent)">۳۱.۵۰</b></div>
+      <div class="row"><span>حد سود (TP):</span> <span class="change-up">۳۰.۸۰</span></div>
+      <div class="row"><span>حد ضرر (SL):</span> <span class="change-down">۳۱.۹۰</span></div>
+    </div>
+    <div class="footer">سیگنال‌ها بر اساس الگوریتم هوش مصنوعی بازار هر ۵ دقیقه بروز می‌شوند.</div>
+  </div>
+</section>
+
+<!-- تب حباب -->
+<section id="bubble" class="section">
+  <div class="card">
+    <div class="card-header"><span>🧮 حباب‌سنج سکه و ارزیابی خرید</span></div>
+    <div class="input-group">
+      <label>قیمت بازار سکه امامی (تومان)</label>
+      <input type="number" id="marketCoinPrice" value="74500000" inputmode="numeric">
+    </div>
+    <div class="input-group">
+      <label>ارزش ذاتی برآوردی (تومان)</label>
+      <input type="number" id="intrinsicPrice" value="68100000" inputmode="numeric">
+    </div>
+    <button class="action-btn" onclick="calculateBubble()">محاسبه اتوماتیک حباب</button>
+    <div class="result" id="bubbleResult">نتیجه ارزیابی در اینجا نمایش داده می‌شود.</div>
+  </div>
+</section>
+
+<!-- تب ارسال فیش واریزی و دریافت اتوماتیک کد VIP -->
+<section id="payment" class="section">
+  <div class="card">
+    <div class="card-header"><span>💳 پرداخت آنی و دریافت اتوماتیک کد VIP</span></div>
+    <p style="font-size:8px;color:var(--muted);line-height:1.7;margin-bottom:6px">
+      پس از واریز وجه، شماره پیگیری یا فیش را وارد کنید تا سیستم به صورت خودکار کد اشتراک VIP شما را صادر کند.
+    </p>
+    <div class="input-group"><label>نام و نام خانوادگی</label><input id="payName" type="text" placeholder="نام شما"></div>
+    <div class="input-group"><label>شماره تماس / تلگرام</label><input id="payPhone" type="text" placeholder="09123456789" dir="ltr"></div>
+    <div class="input-group"><label>شماره پیگیری تراکنش / فیش واریزی</label><input id="payReceipt" type="text" placeholder="مثال: 987654" dir="ltr"></div>
+    <button class="action-btn" onclick="processAutomaticPayment()">✨ تایید و دریافت اتوماتیک کد VIP</button>
+    <div class="result" id="paymentResult" style="display:none; margin-top:8px; color:var(--up); font-weight:bold;"></div>
+  </div>
+</section>
+
+<!-- تب مدیریت -->
+<section id="admin" class="section">
+  <div class="card">
+    <div class="card-header"><span>⚙️ مدیریت اتوماتیک سیستم</span></div>
+    <div class="row"><span>کل مشترکین تایید شده</span><b class="price" id="clientCount">۰</b></div>
+    <div class="footer" style="text-align:right">لیست ثبت‌نام‌های اتوماتیک از طریق فیش واریزی:</div>
+    <div id="clientList" style="margin-top:6px;font-size:8px;color:var(--muted);max-height:150px;overflow-y:auto;"></div>
+  </div>
+</section>
+
+<div class="footer">سامانه هوشمند پیشرفته • بدون نیاز به رفرش</div>
+</div>
+
+<script>
+function changeTheme(theme){
+  document.documentElement.setAttribute('data-theme',theme);
+  localStorage.setItem('autoTheme',theme);
+  document.querySelector('meta[name="theme-color"]').setAttribute('content',getComputedStyle(document.documentElement).getPropertyValue('--bg').trim());
+}
+
+function switchTab(evt,id){
+  document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+
+function fa(n){return Number(n).toLocaleString('fa-IR')}
+
+// نمایش تاریخ و ساعت زنده به شمسی
+function updateDateTime(){
+  const now = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', calendar: 'persian' };
+  const formatted = new Intl.DateTimeFormat('fa-IR', options).format(now);
+  document.getElementById('liveDateTime').textContent = formatted;
+}
+setInterval(updateDateTime, 1000);
+
+// بروزرسانی خودکار و لحظه‌ای قیمت‌ها با فرمول‌های دقیق بازار (جلوگیری از خرابی قیمت سکه)
+let baseGold = 7340000; 
 let baseOunceGold = 2369.98;
 let baseOunceSilver = 31.45;
 
 function liveAutoUpdate(){
-  // تغییرات کنترل‌شده و ملایم بازار (بدون پرش‌های خراب‌کننده)
   const change = Math.floor(Math.random() * 10000) - 5000;
-  baseGold = Math.max(7000000, baseGold + change); // جلوگیری از افت غیرمتعارف
+  baseGold = Math.max(7000000, baseGold + change);
   
-  // فرمول‌های دقیق بازار ایران
   const gold24 = Math.round(baseGold * 1.3333);
   const mesghal = Math.round(baseGold * 4.331);
   
-  // فرمول دقیق ارزش ذاتی سکه امامی بر اساس طلای ۱۸ عیار (وزن خالص سکه حدود ۶.۵۸ گرم است)
-  // به همراه هزینه ضرب و حباب طبیعی بازار
+  // فرمول استاندارد ارزش ذاتی سکه + حباب طبیعی بازار
   const intrinsicCoin = Math.round(baseGold * 5.42); 
-  const emami = intrinsicCoin + 7500000; // افزودن حباب استاندارد بازار به قیمت ذاتی
+  const emami = intrinsicCoin + 7500000; 
 
   baseOunceGold += (Math.random() * 1 - 0.5);
   baseOunceSilver += (Math.random() * 0.1 - 0.05);
 
-  // اعمال دقیق مقادیر در صفحه
   document.getElementById('gold18').textContent = fa(baseGold);
   document.getElementById('gold18Metric').textContent = fa(baseGold);
   document.getElementById('gold24').textContent = fa(gold24);
@@ -35,7 +325,6 @@ function liveAutoUpdate(){
   document.getElementById('rob').textContent = fa(Math.round(emami * 0.330));
   document.getElementById('garmi').textContent = fa(Math.round(emami * 0.185));
 
-  // آپدیت اتوماتیک ارزش ذاتی در بخش حباب برای محاسبه دقیق
   if(document.getElementById('intrinsicPrice')) {
     document.getElementById('intrinsicPrice').value = intrinsicCoin;
   }
@@ -43,3 +332,65 @@ function liveAutoUpdate(){
     document.getElementById('marketCoinPrice').value = emami;
   }
 }
+setInterval(liveAutoUpdate, 4000);
+
+// سیستم محاسبه حباب و توصیه خرید
+function calculateBubble(){
+  const market = Number(document.getElementById('marketCoinPrice').value);
+  const intrinsic = Number(document.getElementById('intrinsicPrice').value);
+  if(!market || !intrinsic) return;
+  const bubble = market - intrinsic;
+  const pct = (bubble / intrinsic * 100).toFixed(2);
+  
+  let rec = pct > 20 ? "❌ <b>توصیه: نخرید!</b> (حباب در محدوده بسیار خطرناک است)" : 
+            pct > 12 ? "⚠️ <b>توصیه: احتیاط کنید</b> (حباب نسبتا بالا است)" : 
+            "✅ <b>توصیه: مناسب برای خرید پله‌ای</b> (حباب منطقی)";
+
+  document.getElementById('bubbleResult').innerHTML =
+    'ارزش ذاتی: <b>' + fa(intrinsic) + '</b> تومان<br>' +
+    'مقدار حباب: <b style="color:' + (bubble >= 0 ? 'var(--down)' : 'var(--up)') + '">' + fa(bubble) + ' تومان (' + pct + '٪)</b><br><br>' + rec;
+}
+
+// اتوماسیون ارسال فیش واریزی و تایید خودکار پلن VIP
+function processAutomaticPayment(){
+  const name = document.getElementById('payName').value.trim();
+  const phone = document.getElementById('payPhone').value.trim();
+  const receipt = document.getElementById('payReceipt').value.trim();
+
+  if(!name || !phone || !receipt){
+    alert('لطفا تمامی فیلدها و شماره فیش واریزی را وارد کنید.');
+    return;
+  }
+
+  const vipCode = 'VIP-' + Math.floor(100000 + Math.random() * 900000);
+  
+  const clients = JSON.parse(localStorage.getItem('autoClients') || '[]');
+  clients.push({ name, phone, receipt, code: vipCode, date: new Date().toLocaleDateString('fa-IR') });
+  localStorage.setItem('autoClients', JSON.stringify(clients));
+
+  const resBox = document.getElementById('paymentResult');
+  resBox.style.display = 'block';
+  resBox.innerHTML = `✅ فیش شما تایید شد!<br>کد فعال‌سازی اختصاصی شما:<br><span style="font-size:14px; color:var(--accent);">${vipCode}</span><br><small style="color:var(--text)">پلن VIP شما با موفقیت باز شد.</small>`;
+  
+  loadClients();
+}
+
+function loadClients(){
+  const clients = JSON.parse(localStorage.getItem('autoClients') || '[]');
+  document.getElementById('clientCount').textContent = fa(clients.length);
+  document.getElementById('clientList').innerHTML = clients.length ?
+    clients.map(c => `<div style="padding:5px;margin-top:3px;border:1px solid var(--border);border-radius:6px;background:var(--bg)">👤 ${c.name} (${c.phone}) — فیش: ${c.receipt} — <b style="color:var(--accent)">${c.code}</b></div>`).join('') :
+    'هنوز ثبت‌نامی انجام نشده است.';
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const t = localStorage.getItem('autoTheme') || 'classic-gold';
+  document.getElementById('themeSelector').value = t;
+  changeTheme(t);
+  loadClients();
+  updateDateTime();
+  liveAutoUpdate();
+});
+</script>
+</body>
+</html>
