@@ -1,124 +1,42 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold App</title>
+<style>
+body{background:#090909;color:#fff;font-family:Tahoma,sans-serif;padding:15px;max-width:480px;margin:auto}
+.card{background:#171717;border:1px solid #5b4215;border-radius:12px;padding:15px;margin-bottom:10px}
+.price{color:#ffd15c;font-weight:bold;font-size:18px}
+button{width:100%;padding:12px;background:#ffd15c;border:0;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px;font-size:14px}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2>نرخ زنده طلا و سکه</h2>
+  <hr style="border-color:#333;margin:10px 0">
+  <p>طلای ۱۸ عیار: <span class="price" id="gold18">۷,۳۴۰,۰۰۰</span> تومان</p>
+  <p>سکه امامی: <span class="price" id="emami">۷۴,۵۰۰,۰۰۰</span> تومان</p>
+</div>
+
+<button onclick="updatePrice()">بروزرسانی قیمت</button>
+
 <script>
-function changeTheme(theme){
-  document.documentElement.setAttribute('data-theme',theme);
-  localStorage.setItem('autoTheme',theme);
-  document.querySelector('meta[name="theme-color"]').setAttribute('content',getComputedStyle(document.documentElement).getPropertyValue('--bg').trim());
-}
-
-function switchTab(evt,id){
-  document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  evt.currentTarget.classList.add('active');
-}
-
+let baseGold = 7340000;
 function fa(n){return Number(n).toLocaleString('fa-IR')}
 
-function updateDateTime(){
-  const now = new Date();
-  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', calendar: 'persian' };
-  document.getElementById('liveDateTime').textContent = new Intl.DateTimeFormat('fa-IR', options).format(now);
-}
-setInterval(updateDateTime, 1000);
+function updatePrice(){
+  const change = Math.floor(Math.random() * 20000) - 10000;
+  baseGold = Math.max(7000000, baseGold + change);
+  const emami = Math.round(baseGold * 5.42) + 7500000;
 
-// ========== قیمت‌های پایه دقیق امروز (۱۷ سپتامبر ۲۰۲۶) ==========
-let baseGold18   = 23300000;      // طلای ۱۸ عیار (تومان)
-let baseOunceGold = 4361.35;      // انس طلا (دلار)
-let baseOunceSilver = 65.50;      // انس نقره (دلار)
-
-function liveAutoUpdate(){
-  // نوسان واقعی کوچک برای طلای داخلی (هر چند ثانیه)
-  const goldChange = Math.floor(Math.random() * 18000) - 9000; // ±۹ هزار تومان
-  baseGold18 = Math.max(22000000, baseGold18 + goldChange);
-
-  // محاسبه بقیه قیمت‌ها با فرمول‌های استاندارد بازار
-  const gold24   = Math.round(baseGold18 * 1.3333);
-  const mesghal  = Math.round(baseGold18 * 4.331);          // مثقال ≈ ۴.۳۳۱ گرم ۱۸ عیار
-  const intrinsicCoin = Math.round(baseGold18 * 8.13);      // ارزش ذاتی تقریبی سکه امامی
-  const emami    = intrinsicCoin + 42000000;                // + حباب فعلی بازار
-
-  // نوسان انس جهانی
-  baseOunceGold   += (Math.random() * 2.8 - 1.4);
-  baseOunceSilver += (Math.random() * 0.25 - 0.12);
-
-  // به‌روزرسانی DOM
-  document.getElementById('gold18').textContent        = fa(baseGold18);
-  document.getElementById('gold18Metric').textContent  = fa(baseGold18);
-  document.getElementById('gold24').textContent        = fa(gold24);
-  document.getElementById('mesghal').textContent       = fa(mesghal);
-  document.getElementById('ounceGold').textContent     = '$' + baseOunceGold.toFixed(2);
-  document.getElementById('ounceSilver').textContent   = '$' + baseOunceSilver.toFixed(2);
-
-  document.getElementById('emami').textContent         = fa(emami);
-  document.getElementById('coinMetric').textContent    = fa(emami);
-  document.getElementById('bahar').textContent         = fa(Math.round(emami * 0.989));
-  document.getElementById('nim').textContent           = fa(Math.round(emami * 0.508));
-  document.getElementById('rob').textContent           = fa(Math.round(emami * 0.270));
-  document.getElementById('garmi').textContent         = fa(Math.round(emami * 0.138));
-
-  // همگام‌سازی ورودی‌های حباب‌سنج
-  if(document.getElementById('intrinsicPrice')) {
-    document.getElementById('intrinsicPrice').value = intrinsicCoin;
-  }
-  if(document.getElementById('marketCoinPrice')) {
-    document.getElementById('marketCoinPrice').value = emami;
-  }
+  document.getElementById('gold18').textContent = fa(baseGold);
+  document.getElementById('emami').textContent = fa(emami);
 }
 
-// بروزرسانی هر ۲.۵ ثانیه (نزدیک به لحظه‌ای)
-setInterval(liveAutoUpdate, 2500);
+setInterval(updatePrice, 3000);
+</script>
 
-// تلاش برای گرفتن قیمت واقعی انس طلا از API رایگان (اگر CORS اجازه دهد)
-async function fetchRealGoldPrice(){
-  try {
-    const res = await fetch('https://api.goldprice.dev/v1/prices?symbol=XAU-USD-SPOT');
-    const data = await res.json();
-    if(data?.symbols?.[0]?.price){
-      baseOunceGold = parseFloat(data.symbols[0].price);
-      document.getElementById('ounceGold').textContent = '$' + baseOunceGold.toFixed(2);
-    }
-  } catch(e){
-    // در صورت خطا همان شبیه‌سازی ادامه می‌دهد
-  }
-}
-
-// هر ۳۰ ثانیه یک‌بار انس واقعی را چک کند
-setInterval(fetchRealGoldPrice, 30000);
-fetchRealGoldPrice(); // اولین بار
-
-// ========== بقیه توابع بدون تغییر ==========
-function calculateBubble(){
-  const market = Number(document.getElementById('marketCoinPrice').value);
-  const intrinsic = Number(document.getElementById('intrinsicPrice').value);
-  if(!market || !intrinsic) return;
-  const bubble = market - intrinsic;
-  const pct = (bubble / intrinsic * 100).toFixed(2);
-  
-  let rec = pct > 20 ? "❌ <b>توصیه: نخرید!</b> (حباب در محدوده بسیار خطرناک است)" : 
-            pct > 12 ? "⚠️ <b>توصیه: احتیاط کنید</b> (حباب نسبتا بالا است)" : 
-            "✅ <b>توصیه: مناسب برای خرید پله‌ای</b> (حباب منطقی)";
-
-  document.getElementById('bubbleResult').innerHTML =
-    'ارزش ذاتی: <b>' + fa(intrinsic) + '</b> تومان<br>' +
-    'مقدار حباب: <b style="color:' + (bubble >= 0 ? 'var(--down)' : 'var(--up)') + '">' + fa(bubble) + ' تومان (' + pct + '٪)</b><br><br>' + rec;
-}
-
-function processAutomaticPayment(){
-  const name = document.getElementById('payName').value.trim();
-  const phone = document.getElementById('payPhone').value.trim();
-  const receipt = document.getElementById('payReceipt').value.trim();
-
-  if(!name || !phone || !receipt){
-    alert('لطفا تمامی فیلدها و شماره فیش واریزی را وارد کنید.');
-    return;
-  }
-
-  const vipCode = 'VIP-' + Math.floor(100000 + Math.random() * 900000);
-  
-  const clients = JSON.parse(localStorage.getItem('autoClients') || '[]');
-  clients.push({ name, phone, receipt, code: vipCode, date: new Date().toLocaleDateString('fa-IR') });
-  localStorage.setItem('autoClients', JSON.stringify(clients));
-
-  const resBox = document.getElementById('paymentResult');
-  resBox.style.display = 'block';
-  resBox.innerHTML = `✅ فیش شما تایید شد!<br>کد فعال‌سازی اختصاصی شما:<br><
+</body>
+</html>
