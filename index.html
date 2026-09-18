@@ -2,393 +2,456 @@
 <html lang="fa" dir="rtl" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<meta name="theme-color" content="#080808">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>Global 3D Gold & Forex Pro</title>
-
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥇</text></svg>">
 <style>
-:root{
-  --bg:#050505; --bg2:#0f0f0f; 
-  --card:linear-gradient(145deg, #181818, #111111);
-  --card2:linear-gradient(145deg, #222222, #161616);
-  --accent:#f5c35b; --accent-dark:#b8860b; 
-  --border:#6b4f17; --border-light:#9c782b;
-  --text:#ffffff; --muted:#b0b0b0; --up:#10b981; --down:#ef4444;
-  --shadow-3d: 6px 6px 14px #020202, -3px -3px 10px rgba(255,255,255,0.05);
-  --shadow-inset: inset 2px 2px 5px #000000, inset -2px -2px 5px rgba(255,255,255,0.08);
-  --font:Tahoma,"Segoe UI",sans-serif;
+:root {
+  --bg: #050505;
+  --bg2: #0c0c0c;
+  --card: linear-gradient(145deg, #1a1a1a, #0e0e0e);
+  --card2: linear-gradient(145deg, #222222, #141414);
+  --accent: #f5c35b;
+  --accent-dark: #b8860b;
+  --accent-glow: rgba(245, 195, 91, 0.35);
+  --border: #6b4f17;
+  --border-light: #9c782b;
+  --text: #ffffff;
+  --muted: #a8a8a8;
+  --up: #10b981;
+  --down: #ef4444;
+  --hold: #f59e0b;
+  --shadow-3d: 8px 8px 18px #000000, -4px -4px 12px rgba(255,255,255,0.04);
+  --shadow-inset: inset 3px 3px 7px #000000, inset -2px -2px 6px rgba(255,255,255,0.06);
+  --font: Tahoma, "Segoe UI", system-ui, sans-serif;
 }
 
-[data-theme="emerald"]{
-  --card:linear-gradient(145deg, #072116, #04140d);
-  --card2:linear-gradient(145deg, #0b3221, #061c12);
-  --accent:#34d399; --accent-dark:#065f46; --border:#047857; --border-light:#10b981;
-}
-[data-theme="royal"]{
-  --card:linear-gradient(145deg, #1a0b2e, #0d0517);
-  --card2:linear-gradient(145deg, #281145, #140624);
-  --accent:#c084fc; --accent-dark:#6b21a8; --border:#7e22ce; --border-light:#a855f7;
-}
-
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%;background:var(--bg)}
-body{
-  color:var(--text);font-family:var(--font);max-width:480px;margin:auto;
-  padding:10px;overflow-x:hidden;
-  background:radial-gradient(circle at 50% -20%, rgba(245,195,91,0.12), transparent 50%), var(--bg);
+[data-theme="emerald"] {
+  --card: linear-gradient(145deg, #072116, #04140d);
+  --card2: linear-gradient(145deg, #0b3221, #061c12);
+  --accent: #34d399;
+  --accent-dark: #065f46;
+  --accent-glow: rgba(52, 211, 153, 0.35);
+  --border: #047857;
+  --border-light: #10b981;
 }
 
-.app{
-  border:2px solid var(--border);border-radius:22px;padding:12px;
-  background:var(--card);
-  box-shadow: 10px 10px 25px #000000, -5px -5px 20px rgba(255,255,255,0.03), var(--shadow-inset);
+[data-theme="royal"] {
+  --card: linear-gradient(145deg, #1a0b2e, #0d0517);
+  --card2: linear-gradient(145deg, #281145, #140624);
+  --accent: #c084fc;
+  --accent-dark: #6b21a8;
+  --accent-glow: rgba(192, 132, 252, 0.35);
+  --border: #7e22ce;
+  --border-light: #a855f7;
 }
 
-/* بالای صفحه سه بعدی */
-.header-top{
-  display:flex;align-items:center;justify-content:space-between;gap:6px;
-  padding:8px 10px;border-radius:14px;border:1px solid var(--border-light);
-  background:var(--card2);margin-bottom:10px;font-size:11px;color:var(--muted);
-  box-shadow:var(--shadow-3d);
+[data-theme="ocean"] {
+  --card: linear-gradient(145deg, #0a1628, #050d18);
+  --card2: linear-gradient(145deg, #0f2138, #081525);
+  --accent: #38bdf8;
+  --accent-dark: #0369a1;
+  --accent-glow: rgba(56, 189, 248, 0.35);
+  --border: #0284c7;
+  --border-light: #0ea5e9;
 }
 
-.topbar{
-  display:flex;align-items:center;justify-content:space-between;gap:8px;
-  padding:10px;border-radius:16px;border:1.5px solid var(--border);
-  background:var(--card2);
-  box-shadow:var(--shadow-3d);
-  margin-bottom:12px;
-}
-.logo{display:flex;align-items:center;gap:8px}
-.logo-icon{
-  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;
-  background:linear-gradient(145deg, var(--accent), var(--accent-dark));color:#000;
-  border:1px solid var(--border-light);
-  box-shadow: 4px 4px 8px #000, inset 2px 2px 4px rgba(255,255,255,0.6);
-}
-.logo h1{font-size:13px;color:var(--accent);text-shadow:0 2px 4px rgba(0,0,0,0.8);font-weight:bold;}
-
-.select-box{
-  padding:6px 8px;border-radius:10px;background:var(--bg);color:var(--accent);
-  border:1px solid var(--border);font-size:11px;outline:0;cursor:pointer;
-  box-shadow:var(--shadow-inset);
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { min-height: 100%; background: var(--bg); }
+body {
+  color: var(--text);
+  font-family: var(--font);
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 10px 10px 20px;
+  overflow-x: hidden;
+  background: radial-gradient(ellipse at 50% -10%, var(--accent-glow), transparent 55%), var(--bg);
+  line-height: 1.45;
 }
 
-/* تب های سه بعدی برجسته */
-.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:12px}
-.tab-btn{
-  min-height:44px;border:1.5px solid var(--border);border-radius:12px;color:var(--muted);
-  background:var(--card2);font-family:inherit;font-size:10px;cursor:pointer;
-  box-shadow:var(--shadow-3d);transition:.2s;text-align:center;padding:2px;font-weight:bold;
+.app {
+  border: 2px solid var(--border);
+  border-radius: 24px;
+  padding: 14px;
+  background: var(--card);
+  box-shadow: 12px 12px 28px #000, -6px -6px 20px rgba(255,255,255,0.03), var(--shadow-inset);
 }
-.tab-btn:active,.tab-btn.active{
-  color:#000;background:linear-gradient(145deg, var(--accent), var(--accent-dark));
-  border-color:var(--border-light);transform:translateY(2px);
-  box-shadow:inset 3px 3px 6px rgba(0,0,0,0.6), 0 0 12px rgba(245,195,91,0.4);
-}
-.section{display:none;animation:fade .25s ease}
-.section.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* کارت های سه بعدی */
-.card{
-  margin-bottom:10px;padding:12px;border-radius:16px;border:1.5px solid var(--border);
-  background:var(--card);
-  box-shadow:var(--shadow-3d);
-  position:relative;
+/* Header Top */
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1.5px solid var(--border-light);
+  background: var(--card2);
+  margin-bottom: 12px;
+  font-size: 11px;
+  color: var(--muted);
+  box-shadow: var(--shadow-3d);
+  flex-wrap: wrap;
 }
-.card-header{
-  display:flex;align-items:center;justify-content:space-between;
-  color:var(--accent);font-weight:bold;font-size:12px;padding-bottom:8px;margin-bottom:8px;
-  border-bottom:1px solid var(--border);
-  text-shadow:0 1px 2px rgba(0,0,0,0.5);
-}
-.status{font-size:9px;color:var(--up);display:flex;align-items:center;gap:4px;font-weight:bold;}
-.status::before{content:"";width:7px;height:7px;background:var(--up);border-radius:50%;display:inline-block;box-shadow:0 0 8px var(--up);animation:pulse 1.5s infinite}
-@keyframes pulse{0%{opacity:1}50%{opacity:.3}100%{opacity:1}}
+#fullDateDisplay { flex: 1; min-width: 0; font-size: 10.5px; line-height: 1.4; }
 
-.row{
-  min-height:36px;display:flex;align-items:center;justify-content:space-between;
-  padding:6px 4px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11.5px;
+.select-box {
+  padding: 7px 10px;
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--accent);
+  border: 1.5px solid var(--border);
+  font-size: 12px;
+  outline: 0;
+  cursor: pointer;
+  box-shadow: var(--shadow-inset);
+  font-family: inherit;
+  min-width: 110px;
 }
-.row:last-child{border-bottom:0}
-.price{font-weight:bold;color:var(--accent);font-size:12.5px;text-shadow:0 1px 2px rgba(0,0,0,0.5);}
-.badge{padding:3px 8px;border-radius:6px;font-size:9.5px;font-weight:bold;box-shadow:2px 2px 5px rgba(0,0,0,0.4);}
-.badge-buy{background:rgba(16,185,129,0.2);color:var(--up);border:1px solid var(--up)}
-.badge-sell{background:rgba(239,68,68,0.2);color:var(--down);border:1px solid var(--down)}
-.badge-hold{background:rgba(245,195,91,0.2);color:var(--accent);border:1px solid var(--accent)}
 
-/* دکمه های سه بعدی برجسته */
-.action-btn{
-  width:100%;border:1.5px solid var(--border-light);border-radius:12px;padding:12px;
-  background:linear-gradient(145deg, var(--accent), var(--accent-dark));color:#000;
-  font-family:inherit;font-weight:bold;font-size:12px;cursor:pointer;
-  box-shadow: 5px 5px 12px #000, inset 2px 2px 4px rgba(255,255,255,0.5);
-  transition:.15s;margin-top:8px;text-align:center;
+/* Topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 2px solid var(--border);
+  background: var(--card2);
+  box-shadow: var(--shadow-3d);
+  margin-bottom: 14px;
 }
-.action-btn:active{transform:translateY(2px);box-shadow:inset 3px 3px 6px rgba(0,0,0,0.7)}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  display: grid; place-items: center;
+  font-size: 24px;
+  background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+  color: #000;
+  border: 2px solid var(--border-light);
+  box-shadow: 5px 5px 12px #000, inset 2px 2px 5px rgba(255,255,255,0.55);
+}
+.logo h1 {
+  font-size: 14px;
+  color: var(--accent);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+.logo small { color: var(--muted); font-size: 9px; display: block; margin-top: 2px; }
 
-.input-group{margin:8px 0}
-.input-group label{display:block;color:var(--muted);font-size:10px;margin-bottom:4px;font-weight:bold;}
-.input-group input{
-  width:100%;padding:10px;border-radius:10px;border:1.5px solid var(--border);
-  background:var(--bg);color:var(--text);font-family:inherit;font-size:11px;outline:0;
-  box-shadow:var(--shadow-inset);
+/* Tabs - bigger & more 3D */
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  margin-bottom: 14px;
 }
-.result{
-  margin-top:8px;padding:10px;border-radius:10px;text-align:center;font-size:11px;
-  border:1.5px solid var(--border);background:var(--bg);box-shadow:var(--shadow-inset);
+.tab-btn {
+  min-height: 52px;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  color: var(--muted);
+  background: var(--card2);
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  box-shadow: var(--shadow-3d);
+  transition: all 0.2s ease;
+  text-align: center;
+  padding: 4px 2px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
 }
-.footer{text-align:center;color:var(--muted);font-size:9px;padding:8px 0;font-weight:bold;}
+.tab-btn span { font-size: 16px; line-height: 1; }
+.tab-btn:active, .tab-btn.active {
+  color: #000;
+  background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+  border-color: var(--border-light);
+  transform: translateY(3px);
+  box-shadow: inset 4px 4px 8px rgba(0,0,0,0.55), 0 0 16px var(--accent-glow);
+}
+
+.section { display: none; animation: fade 0.28s ease; }
+.section.active { display: block; }
+@keyframes fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Cards */
+.card {
+  margin-bottom: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 2px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow-3d);
+  position: relative;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 13px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1.5px solid var(--border);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  gap: 8px;
+}
+.status {
+  font-size: 10px;
+  color: var(--up);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.status::before {
+  content: "";
+  width: 8px; height: 8px;
+  background: var(--up);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 10px var(--up);
+  animation: pulse 1.6s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+.row {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 12.5px;
+  gap: 8px;
+}
+.row:last-child { border-bottom: 0; }
+.price {
+  font-weight: 800;
+  color: var(--accent);
+  font-size: 13.5px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  white-space: nowrap;
+}
+.badge {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 10.5px;
+  font-weight: 800;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.45);
+  white-space: nowrap;
+}
+.badge-buy { background: rgba(16,185,129,0.22); color: var(--up); border: 1.5px solid var(--up); }
+.badge-sell { background: rgba(239,68,68,0.22); color: var(--down); border: 1.5px solid var(--down); }
+.badge-hold { background: rgba(245,158,11,0.22); color: var(--hold); border: 1.5px solid var(--hold); }
+
+/* Action buttons */
+.action-btn {
+  width: 100%;
+  border: 2px solid var(--border-light);
+  border-radius: 14px;
+  padding: 14px;
+  background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+  color: #000;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 6px 6px 14px #000, inset 2px 2px 5px rgba(255,255,255,0.5);
+  transition: 0.15s;
+  margin-top: 10px;
+  text-align: center;
+}
+.action-btn:active {
+  transform: translateY(3px);
+  box-shadow: inset 4px 4px 8px rgba(0,0,0,0.65);
+}
+
+.input-group { margin: 10px 0; }
+.input-group label {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  outline: 0;
+  box-shadow: var(--shadow-inset);
+}
+.result {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 12px;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  box-shadow: var(--shadow-inset);
+  line-height: 1.5;
+}
+
+/* Forex signal card */
+.signal-box {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-inset);
+}
+.signal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+.signal-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  font-size: 11.5px;
+  margin-top: 6px;
+}
+.signal-detail div {
+  background: rgba(255,255,255,0.03);
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 10px;
+  padding: 12px 0 4px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* Analysis box */
+.analysis {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(245,195,91,0.08);
+  border: 1.5px solid var(--border);
+  font-size: 12px;
+  line-height: 1.55;
+  text-align: right;
+}
+
+/* Live indicator */
+.live-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  background: var(--up);
+  border-radius: 50%;
+  margin-left: 4px;
+  box-shadow: 0 0 8px var(--up);
+  animation: pulse 1.4s infinite;
+}
 </style>
 </head>
-
 <body>
 <div class="app">
 
-<!-- بالای صفحه: تاریخ و زبان -->
-<div class="header-top">
-  <div id="fullDateDisplay">در حال بارگذاری تاریخ...</div>
-  <select class="select-box" id="langSelect" onchange="changeLang(this.value)">
-    <option value="fa">🇮🇷 فارسی</option>
-    <option value="en">🇺🇸 English</option>
-    <option value="ar">🇸🇦 العربية</option>
-    <option value="tr">🇹🇷 Türkçe</option>
-    <option value="ru">🇷🇺 Русский</option>
-    <option value="de">🇩🇪 Deutsch</option>
-    <option value="fr">🇫🇷 Français</option>
-    <option value="zh">🇨🇳 中文</option>
-    <option value="ja">🇯🇵 日本語</option>
-    <option value="es">🇪🇸 Español</option>
-  </select>
-</div>
-
-<header class="topbar">
-  <div class="logo">
-    <div class="logo-icon">🌐</div>
-    <div>
-      <h1 id="appTitle">سیستم زنده جهانی طلا</h1>
-      <small style="color:var(--muted);font-size:8px;" id="liveStatusText">ارتباط زنده لایو مارکت</small>
-    </div>
+  <!-- Top: Date + Language -->
+  <div class="header-top">
+    <div id="fullDateDisplay">در حال بارگذاری تاریخ...</div>
+    <select class="select-box" id="langSelect" onchange="changeLang(this.value)" aria-label="Language">
+      <option value="fa">🇮🇷 فارسی</option>
+      <option value="en">🇺🇸 English</option>
+      <option value="ar">🇸🇦 العربية</option>
+      <option value="tr">🇹🇷 Türkçe</option>
+      <option value="ru">🇷🇺 Русский</option>
+      <option value="de">🇩🇪 Deutsch</option>
+      <option value="fr">🇫🇷 Français</option>
+      <option value="zh">🇨🇳 中文</option>
+      <option value="ja">🇯🇵 日本語</option>
+      <option value="es">🇪🇸 Español</option>
+    </select>
   </div>
-  <select class="select-box" id="themeSelect" onchange="changeTheme(this.value)">
-    <option value="gold">طلایی لوکس</option>
-    <option value="emerald">زمردی</option>
-    <option value="royal">سلطنتی</option>
-  </select>
-</header>
 
-<nav class="tabs">
-  <button class="tab-btn active" onclick="switchTab(event,'secGold')">🥇 طلا</button>
-  <button class="tab-btn" onclick="switchTab(event,'secCoin')">🌕 سکه</button>
-  <button class="tab-btn" onclick="switchTab(event,'secForex')">📈 فارکس</button>
-  <button class="tab-btn" onclick="switchTab(event,'secSub')">💳 اشتراک</button>
-  <button class="tab-btn" onclick="switchTab(event,'secAdmin')">⚙️ مدیریت</button>
-</nav>
-
-<!-- بخش اول: طلا -->
-<section id="secGold" class="section active">
-  <div class="card">
-    <div class="card-header">
-      <span>بخش اول: نرخ‌های زنده جهانی طلا</span>
-      <span class="status">بروزرسانی آنلاین</span>
-    </div>
-    <div class="row"><span>انس جهانی طلا (XAUUSD)</span><span class="price" id="goldOunce">در حال دریافت...</span></div>
-    <div class="row"><span>نرخ لحظه‌ای دلار مبنا</span><span class="price" id="usdRate">در حال دریافت...</span></div>
-    <div class="row"><span>طلای ۱۸ عیار (۷۵۰)</span><span class="price" id="g18">...</span></div>
-    <div class="row"><span>طلای ۲۴ عیار</span><span class="price" id="g24">...</span></div>
-    <div class="row"><span>مثقال طلای آب‌شده</span><span class="price" id="mesghal">...</span></div>
-    <div class="row">
-      <span>سیگنال خرید/فروش طلا</span>
-      <span class="badge badge-buy">فرصت خرید پله‌ای (BUY)</span>
-    </div>
-  </div>
-</section>
-
-<!-- بخش دوم: سکه -->
-<section id="secCoin" class="section">
-  <div class="card">
-    <div class="card-header">
-      <span>بخش دوم: سکه‌ها، حباب‌سنج و راهنما</span>
-      <span class="status">فعال</span>
-    </div>
-    <div class="row">
-      <span>سکه امامی</span>
-      <div><span class="price" id="cEmami">...</span> <span class="badge badge-hold">نگهداری (HOLD)</span></div>
-    </div>
-    <div class="row">
-      <span>سکه بهار آزادی</span>
-      <div><span class="price" id="cBahar">...</span> <span class="badge badge-buy">مناسب خرید (BUY)</span></div>
-    </div>
-    <div class="row">
-      <span>نیم سکه</span>
-      <div><span class="price" id="cNim">...</span> <span class="badge badge-sell">ریسک حباب (SELL)</span></div>
-    </div>
-    <div class="row">
-      <span>ربع سکه</span>
-      <div><span class="price" id="cRob">...</span> <span class="badge badge-hold">نگهداری (HOLD)</span></div>
-    </div>
-    <div class="row">
-      <span>سکه گرمی</span>
-      <div><span class="price" id="cGarmi">...</span> <span class="badge badge-buy">مناسب خرید (BUY)</span></div>
-    </div>
-    <div class="result" style="text-align:right; margin-top:8px;">
-      💡 <b>تحلیل حباب:</b> نیم‌سکه و ربع‌سکه حباب بالایی دارند. سکه امامی و بهار آزادی گزینه‌های منطقی‌تری برای سرمایه‌گذاری هستند.
-    </div>
-  </div>
-</section>
-
-<!-- بخش سوم: فارکس -->
-<section id="secForex" class="section">
-  <div class="card">
-    <div class="card-header">
-      <span>بخش سوم: سیگنال‌های تخصصی فارکس</span>
-      <span class="status">لایو مارکت</span>
-    </div>
-    <div style="background:var(--bg); border:1.5px solid var(--border); border-radius:12px; padding:10px; margin-bottom:8px; box-shadow:var(--shadow-inset);">
-      <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; font-weight:bold; margin-bottom:6px;">
-        <span style="color:var(--accent);">🥇 طلا (XAUUSD)</span>
-        <span class="badge badge-buy">BUY LIMIT</span>
+  <!-- Logo + Theme -->
+  <header class="topbar">
+    <div class="logo">
+      <div class="logo-icon">🥇</div>
+      <div>
+        <h1 id="appTitle">سیستم زنده جهانی طلا</h1>
+        <small id="liveStatusText">● ارتباط زنده لایو مارکت</small>
       </div>
-      <div class="row"><span>نقطه ورود (Entry):</span> <span class="price" id="fxGoldEntry">بر اساس انس</span></div>
-      <div class="row"><span>حد سود (TP):</span> <span style="color:var(--up)" id="fxGoldTP">محاسبه خودکار</span></div>
-      <div class="row"><span>حد ضرر (SL):</span> <span style="color:var(--down)" id="fxGoldSL">محاسبه خودکار</span></div>
-      <div class="row"><span>تامین‌کننده:</span> <b style="color:var(--muted);">Global AI Quant</b></div>
     </div>
-  </div>
-</section>
+    <select class="select-box" id="themeSelect" onchange="changeTheme(this.value)" aria-label="Theme">
+      <option value="gold">طلایی لوکس</option>
+      <option value="emerald">زمردی</option>
+      <option value="royal">سلطنتی</option>
+      <option value="ocean">اقیانوسی</option>
+    </select>
+  </header>
 
-<!-- بخش چهارم: اشتراک -->
-<section id="secSub" class="section">
-  <div class="card">
-    <div class="card-header"><span>بخش چهارم: صدور اتوماتیک کد VIP</span></div>
-    <div class="input-group"><label>نام و نام خانوادگی</label><input id="subName" type="text" placeholder="نام شما"></div>
-    <div class="input-group"><label>شماره تماس / تلگرام</label><input id="subPhone" type="text" placeholder="09123456789" dir="ltr"></div>
-    <div class="input-group"><label>شماره فیش واریزی</label><input id="subReceipt" type="text" placeholder="مثال: 489201" dir="ltr"></div>
-    <button class="action-btn" onclick="processAutoSubscription()">✨ تایید و صدور آنی کد VIP</button>
-    <div class="result" id="subResult" style="display:none; color:var(--up); font-weight:bold;"></div>
-  </div>
-</section>
+  <!-- Tabs -->
+  <nav class="tabs">
+    <button class="tab-btn active" onclick="switchTab(event,'secGold')"><span>🥇</span>طلا</button>
+    <button class="tab-btn" onclick="switchTab(event,'secCoin')"><span>🌕</span>سکه</button>
+    <button class="tab-btn" onclick="switchTab(event,'secForex')"><span>📈</span>فارکس</button>
+    <button class="tab-btn" onclick="switchTab(event,'secSub')"><span>💳</span>اشتراک</button>
+    <button class="tab-btn" onclick="switchTab(event,'secAdmin')"><span>⚙️</span>مدیریت</button>
+  </nav>
 
-<!-- بخش پنجم: مدیریت -->
-<section id="secAdmin" class="section">
-  <div class="card">
-    <div class="card-header"><span>بخش پنجم: پنل مدیریت اتوماتیک</span><span class="status">فعال</span></div>
-    <div class="row"><span>تعداد کل اشتراک‌ها</span><b class="price" id="adminCount">۰</b></div>
-    <div id="adminList" style="margin-top:6px; font-size:10px; max-height:140px; overflow-y:auto;"></div>
-  </div>
-</section>
+  <!-- ===== SECTION 1: GOLD ===== -->
+  <section id="secGold" class="section active">
+    <div class="card">
+      <div class="card-header">
+        <span id="goldHeader">نرخ‌های زنده جهانی طلا</span>
+        <span class="status">بروزرسانی آنلاین</span>
+      </div>
+      <div class="row"><span id="lblOunce">انس جهانی طلا (XAUUSD)</span><span class="price" id="goldOunce">...</span></div>
+      <div class="row"><span id="lblUsd">نرخ لحظه‌ای دلار مبنا</span><span class="price" id="usdRate">...</span></div>
+      <div class="row"><span id="lblG18">طلای ۱۸ عیار (۷۵۰)</span><span class="price" id="g18">...</span></div>
+      <div class="row"><span id="lblG24">طلای ۲۴ عیار</span><span class="price" id="g24">...</span></div>
+      <div class="row"><span id="lblMesghal">مثقال طلای آب‌شده</span><span class="price" id="mesghal">...</span></div>
+      <div class="row">
+        <span id="lblGoldSignal">سیگنال طلا</span>
+        <span class="badge badge-buy" id="goldSignalBadge">فرصت خرید پله‌ای</span>
+      </div>
+      <div class="analysis" id="goldAnalysis">
+        💡 <b>تحلیل خرید/فروش:</b><br>
+        • طلای ۱۸ و ۲۴ عیار: مناسب خرید پله‌ای در اصلاحات کوتاه‌مدت.<br>
+        • مثقال آب‌شده: گزینه کم‌حباب برای سرمایه‌گذاری میان‌مدت.<br>
+        • سیگنال کلی: <b style="color:var(--up)">BUY</b> با مدیریت ریسک.
+      </div>
+    </div>
+  </section>
 
-<div class="footer">Global 3D Live Engine • 2026</div>
-</div>
-
-<script>
-function changeTheme(theme){
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('appTheme', theme);
-}
-
-const translations = {
-  fa: { title: "سیستم زنده جهانی طلا" },
-  en: { title: "Global 3D Gold & Forex" }
-};
-
-function changeLang(lang){
-  localStorage.setItem('appLang', lang);
-  const t = translations[lang] || translations.fa;
-  document.getElementById('appTitle').textContent = t.title;
-}
-
-function switchTab(evt, id){
-  document.querySelectorAll('.section').forEach(x => x.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  evt.currentTarget.classList.add('active');
-}
-
-function faNum(n){return Number(n).toLocaleString('fa-IR')}
-
-function updateFullDates(){
-  const now = new Date();
-  const shamsi = new Intl.DateTimeFormat('fa-IR', { dateStyle: 'full', calendar: 'persian' }).format(now);
-  const miladi = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(now);
-  const qamari = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', { dateStyle: 'medium' }).format(now);
-  document.getElementById('fullDateDisplay').innerHTML = `📅 ${shamsi} | 🌙 ${qamari} | 🌍 ${miladi}`;
-}
-setInterval(updateFullDates, 1000);
-
-async function fetchLiveMarketData() {
-  try {
-    const res = await fetch('https://api.gold-api.com/price/XAU');
-    const data = await res.json();
-    if(data && data.price) {
-      const liveOunce = data.price;
-      document.getElementById('goldOunce').textContent = '$' + liveOunce.toFixed(2);
-      const liveUsd = 70500; 
-      document.getElementById('usdRate').textContent = faNum(liveUsd) + ' تومان';
-
-      const calculated18 = Math.round((liveOunce * liveUsd) / 31.1035 * 0.75);
-      document.getElementById('g18').textContent = faNum(calculated18) + ' تومان';
-      document.getElementById('g24').textContent = faNum(Math.round(calculated18 * 1.3333)) + ' تومان';
-      document.getElementById('mesghal').textContent = faNum(Math.round(calculated18 * 4.331)) + ' تومان';
-
-      const intrinsicCoin = Math.round(calculated18 * 5.42);
-      document.getElementById('cEmami').textContent = faNum(intrinsicCoin + 8500000);
-      document.getElementById('cBahar').textContent = faNum(intrinsicCoin + 6200000);
-      document.getElementById('cNim').textContent = faNum(Math.round(intrinsicCoin * 0.569) + 4500000);
-      document.getElementById('cRob').textContent = faNum(Math.round(intrinsicCoin * 0.330) + 3200000);
-      document.getElementById('cGarmi').textContent = faNum(Math.round(intrinsicCoin * 0.185) + 2100000);
-
-      document.getElementById('fxGoldEntry').textContent = (liveOunce - 4.0).toFixed(2);
-      document.getElementById('fxGoldTP').textContent = (liveOunce + 15.0).toFixed(2);
-      document.getElementById('fxGoldSL').textContent = (liveOunce - 8.5).toFixed(2);
-      document.getElementById('liveStatusText').textContent = "● آنلاین (بروز شد)";
-    }
-  } catch (err) {
-    document.getElementById('goldOunce').textContent = '$2,369.00';
-    document.getElementById('usdRate').textContent = '۷۰,۵۰۰ تومان';
-    document.getElementById('g18').textContent = '۷,۳۴۰,۰۰۰ تومان';
-    document.getElementById('g24').textContent = '۹,۷۸۶,۰۰۰ تومان';
-    document.getElementById('mesghal').textContent = '۳۱,۷۶۰,۰۰۰ تومان';
-  }
-}
-
-fetchLiveMarketData();
-setInterval(fetchLiveMarketData, 30000);
-
-function processAutoSubscription(){
-  const name = document.getElementById('subName').value.trim();
-  const phone = document.getElementById('subPhone').value.trim();
-  const receipt = document.getElementById('subReceipt').value.trim();
-  if(!name || !phone || !receipt){ alert('لطفا تمام فیلدها را پر کنید.'); return; }
-  const vipCode = 'VIP-3D-' + Math.floor(100000 + Math.random() * 900000);
-  const clients = JSON.parse(localStorage.getItem('globalClients') || '[]');
-  clients.push({ name, phone, receipt, code: vipCode });
-  localStorage.setItem('globalClients', JSON.stringify(clients));
-  const res = document.getElementById('subResult');
-  res.style.display = 'block';
-  res.innerHTML = `✅ فیش تایید شد!<br>کد VIP شما:<br><span style="font-size:14px; color:var(--accent);">${vipCode}</span>`;
-  loadAdminClients();
-}
-
-function loadAdminClients(){
-  const clients = JSON.parse(localStorage.getItem('globalClients') || '[]');
-  document.getElementById('adminCount').textContent = faNum(clients.length);
-  document.getElementById('adminList').innerHTML = clients.length ?
-    clients.map(c => `<div style="padding:6px; margin-top:4px; border:1px solid var(--border); border-radius:8px; background:var(--bg)">👤 ${c.name} | کد: <b style="color:var(--accent)">${c.code}</b></div>`).join('') :
-    'هنوز ثبت‌نامی انجام نشده است.';
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  const t = localStorage.getItem('appTheme') || 'gold';
-  const l = localStorage.getItem('appLang') || 'fa';
-  document.getElementById('themeSelect').value = t;
-  document.getElementById('langSelect').value = l;
-  changeTheme(t);
-  changeLang(l);
-  updateFullDates();
-  loadAdminClients();
-});
-</script>
-</body>
-</html>
+  <!-- ===== SECTION 2: COIN ===== -->
+  <section id="
